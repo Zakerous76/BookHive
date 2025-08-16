@@ -1,0 +1,15 @@
+{
+  "name": "bookhive-backend",
+  "version": "1.0.0",
+  "description": "the backend for the project BookHive",
+  "keywords": [
+    "bookhive"
+  ],
+  "license": "ISC",
+  "author": "zakerous76",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
