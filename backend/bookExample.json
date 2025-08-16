@@ -1,0 +1,44 @@
+{
+  "id": 766,
+  "title": "David Copperfield",
+  "authors": [
+    {
+      "name": "Dickens, Charles",
+      "birth_year": 1812,
+      "death_year": 1870
+    }
+  ],
+  "summaries": [
+    "\"David Copperfield\" by Charles Dickens is a novel written in the mid-19th century. The story revolves around the life of David Copperfield, detailing his personal growth and the myriad experiences that shape his character from childhood through adulthood.   At the start of the narrative, we are introduced to David's birth and the circumstances surrounding it, including the death of his father before he was born and the presence of his stern aunt, Miss Betsey Trotwood. David’s early life is characterized by maternal affection and childhood curiosity, as we meet key figures such as his mother, Peggotty, and the mysterious Miss Betsey, who is eager to have a strong influence in his life. The opening chapters not only set the stage for David's unfolding journey but also hint at the complexities of familial relationships and the challenges he will face as he navigates the trials of growing up without a father. (This is an automatically generated summary.)"
+  ],
+  "translators": [],
+  "subjects": [
+    "Autobiographical fiction",
+    "Bildungsromans",
+    "Boys -- Fiction",
+    "Child labor -- Fiction",
+    "England -- Fiction",
+    "Orphans -- Fiction",
+    "Stepfathers -- Fiction",
+    "Young men -- Fiction"
+  ],
+  "bookshelves": [
+    "Category: British Literature",
+    "Category: Classics of Literature",
+    "Category: Novels",
+    "Harvard Classics"
+  ],
+  "languages": ["en"],
+  "copyright": false,
+  "media_type": "Text",
+  "formats": {
+    "text/html": "https://www.gutenberg.org/ebooks/766.html.images",
+    "application/epub+zip": "https://www.gutenberg.org/ebooks/766.epub3.images",
+    "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/766.kf8.images",
+    "text/plain; charset=us-ascii": "https://www.gutenberg.org/ebooks/766.txt.utf-8",
+    "application/rdf+xml": "https://www.gutenberg.org/ebooks/766.rdf",
+    "image/jpeg": "https://www.gutenberg.org/cache/epub/766/pg766.cover.medium.jpg",
+    "application/octet-stream": "https://www.gutenberg.org/cache/epub/766/pg766-h.zip"
+  },
+  "download_count": 46185
+}
