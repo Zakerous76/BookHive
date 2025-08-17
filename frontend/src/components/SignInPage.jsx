@@ -11,7 +11,6 @@ import Stack from "@mui/material/Stack"
 import MuiCard from "@mui/material/Card"
 import { styled } from "@mui/material/styles"
 import ForgotPassword from "./ForgotPassword"
-import AppTheme from "../shared-theme/AppTheme"
 import ColorModeSelect from "../shared-theme/ColorModeSelect"
 import { GoogleIcon, FacebookIcon, BookHiveIcon } from "./CustomIcons"
 import { useState } from "react"
@@ -58,7 +57,7 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
   },
 }))
 
-export default function SignIn(props) {
+export default function SignInPage(props) {
   const [emailError, setEmailError] = useState(false)
   const [emailErrorMessage, setEmailErrorMessage] = useState("")
   const [passwordError, setPasswordError] = useState(false)
@@ -113,8 +112,7 @@ export default function SignIn(props) {
   }
 
   return (
-    <AppTheme {...props}>
-      <CssBaseline enableColorScheme />
+    <div {...props}>
       <SignInContainer direction="column" justifyContent="space-between">
         <ColorModeSelect
           sx={{ position: "fixed", top: "1rem", right: "1rem" }}
@@ -240,6 +238,6 @@ export default function SignIn(props) {
           </Box>
         </Card>
       </SignInContainer>
-    </AppTheme>
+    </div>
   )
 }

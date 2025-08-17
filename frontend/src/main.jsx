@@ -1,10 +1,12 @@
 import { createRoot } from "react-dom/client"
-import CssBaseline from "@mui/material/CssBaseline"
+import { BrowserRouter as Router } from "react-router-dom"
 
 import App from "./App.jsx"
 
 createRoot(document.getElementById("root")).render(
   <div>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </div>
 )
