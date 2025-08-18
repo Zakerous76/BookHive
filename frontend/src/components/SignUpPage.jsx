@@ -4,7 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline"
 import Divider from "@mui/material/Divider"
 import FormLabel from "@mui/material/FormLabel"
 import FormControl from "@mui/material/FormControl"
-import Link from "@mui/material/Link"
+import { Link, useNavigate } from "react-router-dom"
 import TextField from "@mui/material/TextField"
 import Typography from "@mui/material/Typography"
 import Stack from "@mui/material/Stack"
@@ -12,9 +12,10 @@ import MuiCard from "@mui/material/Card"
 import { styled } from "@mui/material/styles"
 import ForgotPassword from "./ForgotPassword"
 import AppTheme from "../shared-theme/AppTheme"
-import ColorModeSelect from "../shared-theme/ColorModeSelect"
 import { GoogleIcon, FacebookIcon, BookHiveIcon } from "./CustomIcons"
 import { useState } from "react"
+import ColorModeIconDropdown from "../shared-theme/ColorModeIconDropdown"
+import userServices from "../services/userServices"
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -59,33 +60,61 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
 }))
 
 export default function SignUpPage(props) {
+  const [usernameError, setUsernameError] = useState(false)
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState("")
   const [emailError, setEmailError] = useState(false)
   const [emailErrorMessage, setEmailErrorMessage] = useState("")
   const [passwordError, setPasswordError] = useState(false)
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("")
   const [open, setOpen] = useState(false)
+  const navigate = useNavigate()
 
   const handleClose = () => {
     setOpen(false)
   }
 
-  const handleSubmit = (event) => {
-    if (emailError || passwordError) {
-      event.preventDefault()
-      return
-    }
+  const handleSubmit = async (event) => {
+    event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
+    const userInfo = {
+      username: data.get("username"),
       email: data.get("email"),
       password: data.get("password"),
-    })
+    }
+    if (validateInputs()) {
+      const response = await userServices.createUser(userInfo)
+      if (response.error) {
+        setPasswordError(true)
+        setPasswordErrorMessage(
+          `${response.key} "${response.value}" is already used...`
+        )
+      } else if (response.status > 399) {
+        setPasswordError(true)
+        setPasswordErrorMessage(`An error occured. Please try again later...`)
+        console.log(response)
+      } else {
+        navigate("/sign-in")
+      }
+    }
   }
 
   const validateInputs = () => {
     const email = document.getElementById("email")
+    const username = document.getElementById("username")
     const password = document.getElementById("password")
 
     let isValid = true
+
+    if (!username.value || !/^[a-zA-Z0-9_]{3,20}$/.test(username.value)) {
+      setUsernameError(true)
+      setUsernameErrorMessage(
+        "Please enter a valid username. \n(Must be 3-20 Characters) [numbers, letters, underscore]"
+      )
+      isValid = false
+    } else {
+      setUsernameError(false)
+      setUsernameErrorMessage("")
+    }
 
     if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
       setEmailError(true)
@@ -112,7 +141,8 @@ export default function SignUpPage(props) {
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
       <SignUpContainer direction="column" justifyContent="space-between">
-        <ColorModeSelect
+        <ColorModeIconDropdown
+          size="medium"
           sx={{ position: "fixed", top: "1rem", right: "1rem" }}
         />
         <Card variant="outlined">
@@ -122,7 +152,7 @@ export default function SignUpPage(props) {
             variant="h4"
             sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
           >
-            Sign Up
+            Join us!
           </Typography>
           <Box
             component="form"
@@ -136,6 +166,23 @@ export default function SignUpPage(props) {
             }}
           >
             <FormControl>
+              <FormLabel htmlFor="username">Username</FormLabel>
+              <TextField
+                error={usernameError}
+                helperText={usernameErrorMessage}
+                id="username"
+                type="text"
+                name="username"
+                placeholder="your_username"
+                autoComplete="username"
+                autoFocus
+                required
+                fullWidth
+                variant="outlined"
+                color={"primary"}
+              />
+            </FormControl>
+            <FormControl>
               <FormLabel htmlFor="email">Email</FormLabel>
               <TextField
                 error={emailError}
@@ -145,7 +192,6 @@ export default function SignUpPage(props) {
                 name="email"
                 placeholder="your@email.com"
                 autoComplete="email"
-                autoFocus
                 required
                 fullWidth
                 variant="outlined"
@@ -162,7 +208,6 @@ export default function SignUpPage(props) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                autoFocus
                 required
                 fullWidth
                 variant="outlined"
@@ -215,10 +260,7 @@ export default function SignUpPage(props) {
               </Typography>
             </Button>
             <Typography sx={{ textAlign: "center" }}>
-              You already have an account?{" "}
-              <Link href="" variant="body2" sx={{ alignSelf: "center" }}>
-                Sign in
-              </Link>
+              You already have an account? <Link to="/sign-in">Sign in</Link>
             </Typography>
           </Box>
         </Card>
