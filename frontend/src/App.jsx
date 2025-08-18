@@ -10,9 +10,13 @@ import MostPopularBooksPage from "./components/MostPopularBooksPage"
 import UserPage from "./components/UserPage"
 import About from "./components/About"
 import NavigationBar from "./components/NavigationBar"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { initializeUser } from "./reducers/userReducer"
 
 const App = (props) => {
+  const dispatch = useDispatch()
+  dispatch(initializeUser())
+
   const user = useSelector(({ user }) => user)
   const location = useLocation()
   const hideNavbarRoutes = ["/sign-in", "/sign-up"]

@@ -12,7 +12,7 @@ import { styled } from "@mui/material/styles"
 import ForgotPassword from "./ForgotPassword"
 import { GoogleIcon, FacebookIcon, BookHiveIcon } from "./CustomIcons"
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link as RouterLink, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { loginUser } from "../reducers/userReducer"
 import ColorModeIconDropdown from "../shared-theme/ColorModeIconDropdown"
@@ -26,7 +26,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
   gap: theme.spacing(2),
   margin: "auto",
   [theme.breakpoints.up("sm")]: {
-    maxWidth: "450px",
+    maxWidth: "500px",
   },
   boxShadow:
     "hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px",
@@ -67,7 +67,6 @@ export default function SignInPage(props) {
   const [open, setOpen] = useState(false)
 
   const user = useSelector(({ user }) => user)
-  console.log("user", user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   useEffect(() => {
@@ -138,9 +137,9 @@ export default function SignInPage(props) {
           <Typography
             component="h1"
             variant="h4"
-            sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
+            sx={{ width: "100%", fontSize: "clamp(2rem, 20vw, 2.15rem)" }}
           >
-            Sign in
+            Sign in to your account!
           </Typography>
           <Box
             component="form"
@@ -243,13 +242,7 @@ export default function SignInPage(props) {
             </Button>
             <Typography sx={{ textAlign: "center" }}>
               Don&apos;t have an account?{" "}
-              <Link
-                href="/material-ui/getting-started/templates/sign-in/"
-                variant="body2"
-                sx={{ alignSelf: "center" }}
-              >
-                Sign up
-              </Link>
+              <RouterLink to="/sign-up">Sign up</RouterLink>
             </Typography>
           </Box>
         </Card>

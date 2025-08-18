@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import userServices from "../services/userServices"
+import { bookhiveUserToken } from "../utils/constants"
 
 const userSlice = createSlice({
   name: "user",
@@ -13,12 +14,19 @@ const userSlice = createSlice({
 
 export const { setUser } = userSlice.actions
 
+export const initializeUser = () => {
+  return async (dispatch) => {
+    const userToken = window.localStorage.getItem(bookhiveUserToken)
+    dispatch(setUser(userToken))
+  }
+}
+
 export const loginUser = (credentials) => {
   return async (dispatch) => {
-    console.log("Credentials: ", credentials)
     const response = await userServices.login(credentials)
     if (response.token) {
       dispatch(setUser({ ...credentials, token: response.token }))
+      window.localStorage.setItem(bookhiveUserToken, response.token)
     }
     return response
   }
