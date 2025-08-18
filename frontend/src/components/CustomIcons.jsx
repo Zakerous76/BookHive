@@ -2,7 +2,38 @@ import SvgIcon from "@mui/material/SvgIcon"
 import { Link } from "react-router-dom"
 import Box from "@mui/material/Box"
 
-export function BookHiveIcon() {
+export function BookHiveIcon(props) {
+  if (props.text) {
+    return (
+      <Link
+        to="/"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          textDecoration: "none",
+        }}
+      >
+        <Box
+          component="img"
+          src="/logo.png"
+          alt="Logo"
+          sx={{
+            height: 42,
+            mr: 2,
+          }}
+        />
+        <Box
+          component="img"
+          src="/logo-text.png"
+          alt="Logo-text"
+          sx={{
+            height: 32,
+            mr: 2,
+          }}
+        />
+      </Link>
+    )
+  }
   return (
     <Link
       to="/"

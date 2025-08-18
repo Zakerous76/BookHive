@@ -32,4 +32,11 @@ export const loginUser = (credentials) => {
   }
 }
 
+export const logoutUser = () => {
+  return (dispatch) => {
+    window.localStorage.removeItem(bookhiveUserToken)
+    dispatch(setUser(null))
+  }
+}
+
 export default userSlice.reducer
