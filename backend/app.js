@@ -13,10 +13,10 @@ app.use(express.json())
 app.use(express.static("dist"))
 app.use(middleware.requestLogger)
 
-app.use("/login", loginRouter)
-app.use("/review", reviewRouter)
-app.use("/user", userRouter)
-app.use("/book", bookRouter)
+app.use("/api/login", loginRouter)
+app.use("/api/review", reviewRouter)
+app.use("/api/user", userRouter)
+app.use("/api/book", bookRouter)
 
 app.get("/", (req, res) => {
   return res.json({ message: "welcome!" }).end()
