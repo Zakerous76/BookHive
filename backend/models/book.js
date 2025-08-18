@@ -8,32 +8,29 @@ const bookSchema = new mongoose.Schema({
       ref: "Review",
     },
   ],
-  // title: { type: String, required: true },
-  // authors: [
-  //   {
-  //     name: String,
-  //     birth_year: Number,
-  //     death_year: Number,
-  //   },
-  // ],
-  // translators: [
-  //   {
-  //     name: String,
-  //     birth_year: Number,
-  //     death_year: Number,
-  //   },
-  // ],
-  // summaries: [String],
-  // subjects: [String],
-  // bookshelves: [String],
-  // languages: [String],
-  // copyright: Boolean,
-  // media_type: String,
-  // formats: {
-  //   type: Map,
-  //   of: String, // key: MIME type, value: URL
-  // },
-  // download_count: Number,
+  title: { type: String, required: true },
+  authors: [
+    {
+      name: String,
+      birth_year: Number,
+      death_year: Number,
+    },
+  ],
+  translators: [
+    {
+      name: String,
+      birth_year: Number,
+      death_year: Number,
+    },
+  ],
+  summaries: [String],
+  subjects: [String],
+  bookshelves: [String],
+  languages: [String],
+  copyright: Boolean,
+  media_type: String,
+  formats: { type: mongoose.Schema.Types.Mixed }, // allows any object
+  download_count: Number,
 })
 
 bookSchema.set("toJSON", {
