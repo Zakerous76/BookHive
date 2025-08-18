@@ -1,8 +1,28 @@
-import * as React from "react"
 import SvgIcon from "@mui/material/SvgIcon"
+import { Link } from "react-router-dom"
+import Box from "@mui/material/Box"
 
 export function BookHiveIcon() {
-  return <img src="./bookhive-logo.png" alt="Logo" />
+  return (
+    <Link
+      to="/"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        textDecoration: "none",
+      }}
+    >
+      <Box
+        component="img"
+        src="/logo.png"
+        alt="Logo"
+        sx={{
+          height: 42,
+          mr: 2,
+        }}
+      />
+    </Link>
+  )
 }
 
 export function FacebookIcon() {
