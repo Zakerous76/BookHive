@@ -13,7 +13,10 @@ import { styled } from "@mui/material/styles"
 import ForgotPassword from "./ForgotPassword"
 import ColorModeSelect from "../shared-theme/ColorModeSelect"
 import { GoogleIcon, FacebookIcon, BookHiveIcon } from "./CustomIcons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { loginUser } from "../reducers/userReducer"
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -58,11 +61,21 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }))
 
 export default function SignInPage(props) {
-  const [emailError, setEmailError] = useState(false)
-  const [emailErrorMessage, setEmailErrorMessage] = useState("")
+  const [usernameError, setUsernameError] = useState(false)
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState("")
   const [passwordError, setPasswordError] = useState(false)
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("")
   const [open, setOpen] = useState(false)
+
+  const user = useSelector(({ user }) => user)
+  console.log("user", user)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (user) {
+      navigate("/")
+    }
+  }, [navigate, user])
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -72,31 +85,34 @@ export default function SignInPage(props) {
     setOpen(false)
   }
 
-  const handleSubmit = (event) => {
-    if (emailError || passwordError) {
-      event.preventDefault()
-      return
-    }
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get("email"),
+    const credentials = {
+      username: data.get("username"),
       password: data.get("password"),
-    })
+    }
+    const res = await dispatch(loginUser(credentials))
+    if (res.name === "AxiosError") {
+      setPasswordError(true)
+      setPasswordErrorMessage("Wrong Username or Password")
+    }
   }
 
   const validateInputs = () => {
-    const email = document.getElementById("email")
+    const username = document.getElementById("username")
     const password = document.getElementById("password")
 
     let isValid = true
 
-    if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
-      setEmailError(true)
-      setEmailErrorMessage("Please enter a valid email address.")
+    if (!username.value || !/^[a-zA-Z0-9_]+$/.test(username.value)) {
+      setUsernameError(true)
+      setUsernameErrorMessage("Please enter a valid username.")
       isValid = false
     } else {
-      setEmailError(false)
-      setEmailErrorMessage("")
+      setUsernameError(false)
+      setUsernameErrorMessage("")
     }
 
     if (!password.value || password.value.length < 6) {
@@ -129,6 +145,7 @@ export default function SignInPage(props) {
           <Box
             component="form"
             onSubmit={handleSubmit}
+            method="post"
             noValidate
             sx={{
               display: "flex",
@@ -138,20 +155,20 @@ export default function SignInPage(props) {
             }}
           >
             <FormControl>
-              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormLabel htmlFor="username">Username</FormLabel>
               <TextField
-                error={emailError}
-                helperText={emailErrorMessage}
-                id="email"
-                type="email"
-                name="email"
-                placeholder="your@email.com"
-                autoComplete="email"
+                error={usernameError}
+                helperText={usernameErrorMessage}
+                id="username"
+                type="text"
+                name="username"
+                placeholder="your_username"
+                autoComplete="username"
                 autoFocus
                 required
                 fullWidth
                 variant="outlined"
-                color={emailError ? "error" : "primary"}
+                color={"primary"}
               />
             </FormControl>
             <FormControl>
@@ -164,7 +181,6 @@ export default function SignInPage(props) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                autoFocus
                 required
                 fullWidth
                 variant="outlined"

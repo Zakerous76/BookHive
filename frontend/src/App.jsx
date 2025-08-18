@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react"
 import AppTheme from "./shared-theme/AppTheme"
 import CssBaseline from "@mui/material/CssBaseline"
 import { Route, Routes, useLocation } from "react-router-dom"
@@ -11,9 +10,10 @@ import MostPopularBooksPage from "./components/MostPopularBooksPage"
 import UserPage from "./components/UserPage"
 import About from "./components/About"
 import NavigationBar from "./components/NavigationBar"
+import { useSelector } from "react-redux"
 
 const App = (props) => {
-  const [user, setUser] = useState(null)
+  const user = useSelector(({ user }) => user)
   const location = useLocation()
   const hideNavbarRoutes = ["/sign-in", "/sign-up"]
   const shouldHideNavbar = !hideNavbarRoutes.includes(location.pathname)
