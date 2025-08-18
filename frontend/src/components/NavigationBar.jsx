@@ -9,11 +9,12 @@ import Container from "@mui/material/Container"
 import Divider from "@mui/material/Divider"
 import MenuItem from "@mui/material/MenuItem"
 import Drawer from "@mui/material/Drawer"
-import Typography from "@mui/material/Typography"
 import MenuIcon from "@mui/icons-material/Menu"
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 import ColorModeIconDropdown from "../shared-theme/ColorModeIconDropdown"
 import { Link, Links } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { BookHiveIcon } from "./CustomIcons"
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
@@ -33,6 +34,8 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 export default function NavigationBar() {
   const [open, setOpen] = React.useState(false)
+
+  const user = useSelector(({ user }) => user)
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen)
@@ -56,24 +59,7 @@ export default function NavigationBar() {
           >
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {/* Logo */}
-              <Link
-                to="/"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  textDecoration: "none",
-                }}
-              >
-                <Box
-                  component="img"
-                  src="/logo.png" // ← Adjust this path
-                  alt="Logo"
-                  sx={{
-                    height: 42,
-                    mr: 2,
-                  }}
-                />
-              </Link>
+              <BookHiveIcon />
               <Button
                 component={Link}
                 to="/"
@@ -120,11 +106,18 @@ export default function NavigationBar() {
               alignItems: "center",
             }}
           >
-            <Button href="/sign-in" color="primary" variant="text" size="small">
+            <Button
+              component={Link}
+              to="/sign-in"
+              color="primary"
+              variant="text"
+              size="small"
+            >
               Sign in
             </Button>
             <Button
-              href="/sign-up"
+              component={Link}
+              to="/sign-up"
               color="primary"
               variant="contained"
               size="small"
@@ -161,24 +154,7 @@ export default function NavigationBar() {
                 </Box>
 
                 {/* Logo */}
-                <Link
-                  to="/"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    textDecoration: "none",
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src="/logo.png" // ← Adjust this path
-                    alt="Logo"
-                    sx={{
-                      height: 42,
-                      mb: 2,
-                    }}
-                  />
-                </Link>
+                <BookHiveIcon />
                 <MenuItem
                   component={Link}
                   to="/"
@@ -219,12 +195,24 @@ export default function NavigationBar() {
 
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
-                  <Button color="primary" variant="contained" fullWidth>
+                  <Button
+                    component={Link}
+                    to="/sign-up"
+                    color="primary"
+                    variant="contained"
+                    fullWidth
+                  >
                     Sign up
                   </Button>
                 </MenuItem>
                 <MenuItem>
-                  <Button color="primary" variant="outlined" fullWidth>
+                  <Button
+                    component={Link}
+                    to="/sign-in"
+                    color="primary"
+                    variant="outlined"
+                    fullWidth
+                  >
                     Sign in
                   </Button>
                 </MenuItem>
