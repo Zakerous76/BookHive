@@ -10,14 +10,16 @@ import MostPopularBooksPage from "./components/MostPopularBooksPage"
 import UserPage from "./components/UserPage"
 import About from "./components/About"
 import NavigationBar from "./components/NavigationBar"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { initializeUser } from "./reducers/userReducer"
+import { initializeBooks } from "./reducers/booksReducer"
+import BookPage from "./components/BookPage"
 
 const App = (props) => {
   const dispatch = useDispatch()
   dispatch(initializeUser())
+  dispatch(initializeBooks())
 
-  const user = useSelector(({ user }) => user)
   const location = useLocation()
   const hideNavbarRoutes = ["/sign-in", "/sign-up"]
   const shouldHideNavbar = !hideNavbarRoutes.includes(location.pathname)
@@ -35,7 +37,7 @@ const App = (props) => {
           <Route path="/user" element={<UserPage />} />
           <Route path="/all-books" element={<AllBooksPage />} />
           <Route path="/popular-books" element={<MostPopularBooksPage />} />
-          <Route path="/book/:id" element={<MostPopularBooksPage />} />
+          <Route path="/book/:bookId" element={<BookPage />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </BackgroundContainer>
