@@ -14,11 +14,16 @@ import { useDispatch } from "react-redux"
 import { initializeUser } from "./reducers/userReducer"
 import { initializeBooks } from "./reducers/booksReducer"
 import BookPage from "./components/BookPage"
+import { useEffect } from "react"
+import Footer from "./components/Footer"
 
 const App = (props) => {
   const dispatch = useDispatch()
-  dispatch(initializeUser())
-  dispatch(initializeBooks())
+
+  useEffect(() => {
+    dispatch(initializeUser())
+    dispatch(initializeBooks())
+  }, [])
 
   const location = useLocation()
   const hideNavbarRoutes = ["/sign-in", "/sign-up"]
@@ -41,6 +46,7 @@ const App = (props) => {
           <Route path="/about" element={<About />} />
         </Routes>
       </BackgroundContainer>
+      <Footer />
     </AppTheme>
   )
 }

@@ -46,7 +46,7 @@ const WelcomeCard = () => {
       </Typography>
       <Typography
         variant="p"
-        sx={{ pt: "30px", fontSize: "1rem", width: "70%" }}
+        sx={{ pt: "30px", fontSize: "1rem", width: "70%", textAlign: "center" }}
       >
         Here at
         <Typography

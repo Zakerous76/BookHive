@@ -54,7 +54,7 @@ const MostPopularBooksCard = () => {
           flexDirection: "column",
         }}
       >
-        <Typography variant="h3" sx={{ textAlign: "center" }}>
+        <Typography variant="h2" sx={{ textAlign: "center" }}>
           Most Popular Books of the Month
         </Typography>
         <Box
