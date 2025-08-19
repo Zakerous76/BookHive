@@ -1,4 +1,5 @@
 import { createTheme, alpha } from "@mui/material/styles"
+import "@fontsource/satisfy"
 
 const defaultTheme = createTheme()
 
@@ -163,7 +164,12 @@ export const getDesignTokens = (mode) => {
       },
     },
     typography: {
-      fontFamily: "Inter, sans-serif",
+      fontFamily: [
+        "Roboto", // default
+        "Satisfy", // custom
+        "Arial",
+        "sans-serif",
+      ].join(","),
       h1: {
         fontSize: defaultTheme.typography.pxToRem(48),
         fontWeight: 600,
