@@ -3,7 +3,7 @@ const Review = require("../models/review")
 
 reviewRouter.get("/", async (req, res) => {
   try {
-    const reviews = await Review.find({}).populate("User")
+    const reviews = await Review.find({})
     return res.status(200).json(reviews)
   } catch (error) {
     return res.status(404).json(error)
