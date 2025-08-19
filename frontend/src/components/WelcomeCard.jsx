@@ -1,19 +1,23 @@
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
-import React from "react"
+import { useSelector } from "react-redux"
 
 const WelcomeCard = () => {
+  const totalBooks = useSelector(({ books }) => books.totalBooks)
   return (
     <Box
       sx={{
         display: "flex",
-        mt: "80px",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
       }}
     >
-      <Typography component="h1" variant="h1" sx={{ fontSize: "4rem" }}>
+      <Typography
+        component="h1"
+        variant="h1"
+        sx={{ fontSize: "4rem", textAlign: "center" }}
+      >
         Welcome to
         <Typography
           component="span"
@@ -37,15 +41,10 @@ const WelcomeCard = () => {
           BookHive!
         </Typography>
       </Typography>
-      <Typography
-        component="caption"
-        variant="em"
-        sx={{ fontSize: "1rem", fontStyle: "italic" }}
-      >
+      <Typography variant="em" sx={{ fontSize: "1rem", fontStyle: "italic" }}>
         Your #1 Stop for downloading free e-books
       </Typography>
       <Typography
-        component="caption"
         variant="p"
         sx={{ pt: "30px", fontSize: "1rem", width: "70%" }}
       >
@@ -82,6 +81,12 @@ const WelcomeCard = () => {
         </Typography>
         , we’ve designed a space that’s simple, free, and welcoming — just like
         a buzzing hive of knowledge.
+      </Typography>
+      <Typography variant="p" sx={{ mt: "4rem", fontSize: "1.8rem" }}>
+        Total books in the library:{" "}
+        <Typography variant="span" sx={{ fontWeight: "1000" }}>
+          {totalBooks}
+        </Typography>
       </Typography>
     </Box>
   )
