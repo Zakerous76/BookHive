@@ -20,7 +20,7 @@ const HomePage = () => {
           width: "100%",
         }}
       >
-        <Box sx={{ mt: "50px", mb: "100px" }}>
+        <Box sx={{ mt: "100px", mb: "30px" }}>
           <WelcomeCard />
         </Box>
         <Divider />
