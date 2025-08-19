@@ -4,12 +4,21 @@ import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
-import React from "react"
+import { Link } from "react-router-dom"
 
-const BookCard = ({ book }) => {
+const BookCard = ({
+  book,
+  summaryLimit = 500,
+  cardHeight = "350px",
+  target = null,
+}) => {
   return (
     <Grid
-      key={book.id}
+      component={target ? "a" : Link}
+      href={target ? `/book/${book.bookId}` : ``}
+      to={target ? "" : `/book/${book.bookId}`}
+      target={target}
+      key={book.bookId}
       sx={{
         px: 2,
         mt: 5,
@@ -20,13 +29,14 @@ const BookCard = ({ book }) => {
           color: "gold",
         },
         transition: "transform 0.3s ease, letter-spacing 0.3s ease",
+        textDecoration: "inherit",
       }}
     >
       <Card
         sx={{
           display: "flex",
           flexDirection: { xs: "column", sm: "row" },
-          height: "350px",
+          height: cardHeight,
         }}
       >
         <CardMedia
@@ -42,7 +52,7 @@ const BookCard = ({ book }) => {
               {book.authors[0]?.name || "Unknown Author"}
             </Typography>
             <Typography variant="body2" sx={{ mt: 1 }}>
-              {book.summaries?.[0]?.slice(0, 500)}...
+              {book.summaries?.[0]?.slice(0, summaryLimit)}...
             </Typography>
             <Typography
               variant="caption"
