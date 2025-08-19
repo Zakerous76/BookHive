@@ -1,12 +1,7 @@
 import Box from "@mui/material/Box"
-import Card from "@mui/material/Card"
-import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
-import Grid from "@mui/material/Grid"
+
 import Typography from "@mui/material/Typography"
-import React from "react"
 import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
 import BookCard from "./BookCard"
 
 const BookOfTheMomentCard = () => {
@@ -55,8 +50,6 @@ const BookOfTheMomentCard = () => {
         </Box>
       </Box>
       <Box
-        component={Link}
-        to={`/book/${bookOfTheMoment.bookId}`}
         sx={{
           textDecoration: "none",
           display: "flex",
