@@ -82,7 +82,10 @@ const WelcomeCard = () => {
         , we’ve designed a space that’s simple, free, and welcoming — just like
         a buzzing hive of knowledge.
       </Typography>
-      <Typography variant="p" sx={{ mt: "4rem", fontSize: "1.8rem" }}>
+      <Typography
+        variant="p"
+        sx={{ mt: "4rem", fontSize: "1.5rem", textAlign: "center" }}
+      >
         Total books in the library:{" "}
         <Typography variant="span" sx={{ fontWeight: "1000" }}>
           {totalBooks}

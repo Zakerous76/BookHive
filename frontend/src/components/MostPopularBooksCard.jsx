@@ -17,7 +17,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 600, min: 0 },
-    items: 6,
+    items: 2,
     slidesToSlide: 1, // optional, default to 1.
   },
 }
@@ -38,7 +38,7 @@ const MostPopularBooksCard = () => {
 
   useEffect(() => {
     if (mostPopularBooks) {
-      setMostPopularBooks_10(mostPopularBooks.slice(0, 12))
+      setMostPopularBooks_10(mostPopularBooks.slice(0, 24))
     }
   }, [mostPopularBooks])
 
@@ -50,10 +50,33 @@ const MostPopularBooksCard = () => {
           mb: "10px",
           display: "flex",
           justifyContent: "center",
-          alignContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
         }}
       >
-        <Typography variant="h3">Most Popular Books of the Month</Typography>
+        <Typography variant="h3" sx={{ textAlign: "center" }}>
+          Most Popular Books of the Month
+        </Typography>
+        <Box
+          component={Link}
+          to="/popular-books"
+          sx={{
+            mt: "1rem",
+            fontStyle: "italic",
+            color: "inherit",
+            textDecoration: "none",
+            fontWeight: "normal",
+            letterSpacing: "normal",
+            transition: "transform 0.5s ease, letter-spacing 0.3s ease",
+            display: "inline-block", // needed for transform to work properly
+            "&:hover": {
+              transform: "scale(1.05)",
+              color: "gold",
+            },
+          }}
+        >
+          see all...
+        </Box>
       </Box>
       <Box></Box>
       <Box sx={{ mt: "50px", mb: "50px" }}>

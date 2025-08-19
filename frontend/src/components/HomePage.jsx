@@ -25,6 +25,7 @@ const HomePage = () => {
         </Box>
         <Divider />
         <MostPopularBooksCard />
+        <Divider />
       </Stack>
     </Container>
   )
