@@ -5,8 +5,7 @@ import { styled } from "@mui/material/styles"
 // Styled Container component
 const Container = styled(Stack)(({ theme }) => ({
   position: "relative",
-  height: "calc((1 - var(--template-frame-height, 0)) * 100dvh)",
-  minHeight: "100%",
+  minHeight: "100vh",
   padding: theme.spacing(2),
   [theme.breakpoints.up("sm")]: {
     padding: theme.spacing(4),
