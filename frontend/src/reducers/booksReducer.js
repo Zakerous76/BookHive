@@ -7,6 +7,7 @@ const booksSlice = createSlice({
     totalBooks: null,
     mostPopularBooks: null,
     activeBook: null,
+    view: "grid",
   },
   reducers: {
     setTotalBooks(state, action) {
@@ -21,6 +22,9 @@ const booksSlice = createSlice({
     setActiveBookAction(state, action) {
       state.activeBook = action.payload
     },
+    setView(state, action) {
+      state.view = action.payload
+    },
   },
 })
 
@@ -29,6 +33,7 @@ export const {
   setBooks,
   setMostPopularBooks,
   setActiveBookAction,
+  setView,
 } = booksSlice.actions
 
 export const initializeBooks = () => {
