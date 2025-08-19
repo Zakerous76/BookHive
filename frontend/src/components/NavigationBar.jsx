@@ -24,7 +24,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   justifyContent: "space-between",
   flexShrink: 0,
   borderRadius: `calc(${theme.shape.borderRadius}px + 8px)`,
-  backdropFilter: "blur(24px)",
+  backdropFilter: "blur(48px)",
   border: "1px solid",
   borderColor: (theme.vars || theme).palette.divider,
   backgroundColor: theme.vars
@@ -34,7 +34,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   padding: "8px 12px",
 }))
 
-export default function NavigationBar() {
+export default function NavigationBar(props) {
   const [open, setOpen] = React.useState(false)
 
   const user = useSelector(({ user }) => user)
@@ -50,7 +50,7 @@ export default function NavigationBar() {
 
   return (
     <AppBar
-      position="fixed"
+      position={props.position ? props.position : "fixed"}
       enableColorOnDark
       sx={{
         boxShadow: 0,
@@ -65,7 +65,9 @@ export default function NavigationBar() {
             sx={{ flexGrow: 1, display: "flex", alignItems: "center", px: 0 }}
           >
             <Box
-              sx={{ display: { xs: "none", md: "flex", alignItems: "center" } }}
+              sx={{
+                display: { xs: "none", md: "flex", alignItems: "center" },
+              }}
             >
               {/* Logo */}
               <BookHiveIcon />
@@ -74,7 +76,7 @@ export default function NavigationBar() {
                 to="/"
                 color="info"
                 size="small"
-                sx={{ minWidth: 0 }}
+                sx={{ minWidth: 0, ml: "10px" }}
               >
                 Home
               </Button>
