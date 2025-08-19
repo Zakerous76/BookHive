@@ -7,9 +7,6 @@ import ListSubheader from "@mui/material/ListSubheader"
 import Stack from "@mui/material/Stack"
 import IconButton from "@mui/material/IconButton"
 import Card from "@mui/material/Card"
-import CardMedia from "@mui/material/CardMedia"
-import CardContent from "@mui/material/CardContent"
-import Typography from "@mui/material/Typography"
 import Grid from "@mui/material/Grid"
 
 import { useSelector } from "react-redux"
@@ -18,6 +15,8 @@ import ViewHeadlineIcon from "@mui/icons-material/ViewHeadline"
 import Pagination from "@mui/material/Pagination"
 import Container from "@mui/material/Container"
 import BookCard from "./BookCard"
+import BooksList from "./BooksList"
+import BooksGrid from "./BooksGrid"
 
 const MostPopularBooksPage = () => {
   const [view, setView] = useState("grid")
@@ -84,44 +83,9 @@ const MostPopularBooksPage = () => {
 
         {/* Conditional Rendering for Grid or Card View */}
         {view === "grid" ? (
-          <Card sx={{ width: "95%", maxWidth: 1200 }}>
-            <ImageList sx={{ px: 2 }} cols={3} gap={16}>
-              <ImageListItem key="subheader" cols={3}>
-                <ListSubheader component="div">
-                  This month's most downloaded books
-                </ListSubheader>
-              </ImageListItem>
-              {paginatedBooks.map((book) => (
-                <ImageListItem
-                  key={book.bookId}
-                  sx={{
-                    "&:hover": {
-                      transform: "scale(1.05)",
-                      color: "gold",
-                    },
-                    transition: "transform 0.3s ease, letter-spacing 0.3s ease",
-                  }}
-                >
-                  <img
-                    srcSet={`${book.formats["image/jpeg"]}`}
-                    src={`${book.formats["image/jpeg"]}`}
-                    alt={book.title}
-                    loading="lazy"
-                  />
-                  <ImageListItemBar
-                    title={book.title}
-                    subtitle={book.authors[0]?.name || "Unknown Author"}
-                  />
-                </ImageListItem>
-              ))}
-            </ImageList>
-          </Card>
+          <BooksGrid booksList={paginatedBooks} />
         ) : (
-          <Grid container spacing={3} sx={{ px: 2, maxWidth: 1200 }}>
-            {paginatedBooks.map((book) => (
-              <BookCard book={book} key={book.bookId} />
-            ))}
-          </Grid>
+          <BooksList booksList={paginatedBooks} />
         )}
         <Box sx={{ mt: 4, mb: 4 }}>
           <Pagination
