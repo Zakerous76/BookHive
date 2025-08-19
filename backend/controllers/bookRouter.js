@@ -73,7 +73,6 @@ bookRouter.get("/all-books", async (req, res) => {
     .sort({ title: 1 })
     .skip(skip)
     .limit(limit)
-    .populate("review")
   return res.json(allBooks)
 })
 
@@ -81,7 +80,7 @@ bookRouter.get("/all-books", async (req, res) => {
 bookRouter.get("/:bookId", async (req, res) => {
   const bookId = req.params.bookId
   try {
-    const book = await Book.find({ bookId })
+    const book = await Book.findOne({ bookId })
     if (book) {
       return res.status(200).json(book)
     }
