@@ -8,6 +8,15 @@ import IconButton from "@mui/material/IconButton"
 import XIcon from "@mui/icons-material/X"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import { useColorScheme } from "@mui/material/styles"
+import { hoverTransition } from "../shared-theme/themePrimitives"
+
+const technologies = [
+  { name: "React", url: "https://reactjs.org/" },
+  { name: "Redux", url: "https://redux.js.org/" },
+  { name: "Node.js", url: "https://nodejs.org/" },
+  { name: "Express", url: "https://expressjs.com/" },
+  { name: "MongoDB", url: "https://www.mongodb.com/" },
+]
 
 const Footer = () => {
   const { mode, setMode } = useColorScheme()
@@ -31,6 +40,7 @@ const Footer = () => {
           {/* Left: Logo/Name */}
           <Typography
             component={Link}
+            to="/"
             variant="h6"
             sx={(theme) => ({
               fontFamily: "'Satisfy', cursive",
@@ -47,7 +57,7 @@ const Footer = () => {
               "&:hover": {
                 transform: "scale(1.05)",
               },
-              transition: "transform 0.3s ease, letter-spacing 0.3s ease",
+              transition: "transform 0.1s ease, letter-spacing 0.1s ease",
             })}
           >
             BookHive
@@ -55,49 +65,66 @@ const Footer = () => {
 
           {/* Middle: Nav Links */}
           <Stack direction="row" spacing={3}>
-            <Link
-              ro="#"
-              underline="hover"
-              style={{ color: "inherit", textDecoration: "inherit" }}
+            <Box
+              component={"a"}
+              href="/all-books"
+              sx={{
+                color: "inherit",
+                textDecoration: "inherit",
+                ...hoverTransition,
+              }}
+            >
+              All Books
+            </Box>
+            <Box
+              component={"a"}
+              href="/popular-books"
+              sx={{
+                color: "inherit",
+                textDecoration: "inherit",
+                ...hoverTransition,
+              }}
+            >
+              Most Popular Books
+            </Box>
+
+            <Box
+              component={"a"}
+              href="/about"
+              sx={{
+                color: "inherit",
+                textDecoration: "inherit",
+                ...hoverTransition,
+              }}
             >
               About
-            </Link>
-            <Link
-              ro="#"
-              underline="hover"
-              style={{ color: "inherit", textDecoration: "inherit" }}
+            </Box>
+            <Box
+              component={"a"}
+              href="/contact"
+              sx={{
+                color: "inherit",
+                textDecoration: "inherit",
+                ...hoverTransition,
+              }}
             >
               Contact
-            </Link>
-            <Link
-              ro="#"
-              underline="hover"
-              style={{ color: "inherit", textDecoration: "inherit" }}
-            >
-              Privacy
-            </Link>
+            </Box>
           </Stack>
 
           {/* Right: Social Icons */}
           <Stack direction="row" spacing={1}>
             <IconButton
-              href="https://github.com"
+              href="https://github.com/zakerous76"
               target="_blank"
               rel="noopener"
               size="small"
             >
               <GitHubIcon fontSize="inherit" />
             </IconButton>
+
             <IconButton
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener"
-              size="small"
-            >
-              <XIcon fontSize="inherit" />
-            </IconButton>
-            <IconButton
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/zaker-amin/"
               target="_blank"
               rel="noopener"
               size="small"
@@ -108,6 +135,69 @@ const Footer = () => {
         </Stack>
 
         {/* Bottom: Copyright */}
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          textAlign="center"
+          padding="1rem"
+          paddingBottom="0"
+        >
+          Built with{" "}
+          {technologies.map((tech, index) => (
+            <span key={tech.name}>
+              <Box
+                component={"a"}
+                href={tech.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  color: "inherit",
+                  textDecoration: "inherit",
+                  fontWeight: "1000",
+                  ...hoverTransition,
+                }}
+              >
+                {tech.name}
+              </Box>
+              {index < technologies.length - 1 ? ", " : ", "}
+            </span>
+          ))}
+          BookHive is a project by{" "}
+          <Box
+            component={"a"}
+            href="https://github.com/Zakerous76"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={(theme) => ({
+              textDecoration: "inherit",
+              fontWeight: "1000",
+              color: "inherit",
+              ...hoverTransition,
+              "&:hover": {
+                color: "red",
+              },
+            })}
+          >
+            <strong>zakerous76</strong>
+          </Box>
+          , inspired by the{" "}
+          <Box
+            component={"a"}
+            href="https://fullstackopen.com/en/"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              color: "inherit",
+              textDecoration: "inherit",
+              fontWeight: "1000",
+              ...hoverTransition,
+            }}
+          >
+            <strong>FullStackOpen </strong>
+          </Box>{" "}
+          course and driven by a love for making literature accessible to
+          everyone.
+        </Typography>
         <Typography
           variant="caption"
           sx={{
