@@ -10,29 +10,27 @@ import BookOfTheMomentCard from "./BookOfTheMomentCard"
 
 const HomePage = () => {
   return (
-    <Box>
-      <Container>
-        <NavigationBar />
-        <Toolbar />
-        <Stack
-          gap={5}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-          }}
-        >
-          <Box sx={{ mt: "100px", mb: "30px" }}>
-            <WelcomeCard />
-          </Box>
-          <Divider sx={{ borderBottomWidth: 4 }} />
-          <MostPopularBooksCard />
-          <Divider sx={{ borderBottomWidth: 4 }} />
-          <BookOfTheMomentCard />
-          <Divider sx={{ borderBottomWidth: 4 }} />
-        </Stack>
-      </Container>
-    </Box>
+    <Container>
+      <NavigationBar />
+      <Toolbar />
+      <Stack
+        gap={5}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        <Box sx={{ mt: "100px", mb: "30px" }}>
+          <WelcomeCard />
+        </Box>
+        <Divider sx={{ borderBottomWidth: 4 }} />
+        <MostPopularBooksCard />
+        <Divider sx={{ borderBottomWidth: 4 }} />
+        <BookOfTheMomentCard />
+        <Divider sx={{ borderBottomWidth: 4 }} />
+      </Stack>
+    </Container>
   )
 }
 

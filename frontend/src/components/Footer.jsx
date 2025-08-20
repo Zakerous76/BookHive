@@ -11,7 +11,6 @@ import { useColorScheme } from "@mui/material/styles"
 
 const Footer = () => {
   const { mode, setMode } = useColorScheme()
-  console.log("mode:", mode)
   return (
     <Box
       component="footer"

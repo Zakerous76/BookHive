@@ -1,36 +1,30 @@
 import { useState } from "react"
 import Box from "@mui/material/Box"
-import ImageList from "@mui/material/ImageList"
-import ImageListItem from "@mui/material/ImageListItem"
-import ImageListItemBar from "@mui/material/ImageListItemBar"
-import ListSubheader from "@mui/material/ListSubheader"
-import Stack from "@mui/material/Stack"
 import IconButton from "@mui/material/IconButton"
-import Card from "@mui/material/Card"
-import Grid from "@mui/material/Grid"
 
 import { useSelector } from "react-redux"
 import GridViewIcon from "@mui/icons-material/GridView"
 import ViewHeadlineIcon from "@mui/icons-material/ViewHeadline"
 import Pagination from "@mui/material/Pagination"
 import Container from "@mui/material/Container"
-import BookCard from "./BookCard"
 import BooksList from "./BooksList"
 import BooksGrid from "./BooksGrid"
+import Stack from "@mui/material/Stack"
 
 const MostPopularBooksPage = () => {
   const [view, setView] = useState("grid")
   let popularBooks = useSelector(({ books }) => books.mostPopularBooks)
-  if (!popularBooks) popularBooks = []
 
   const [page, setPage] = useState(1)
   const itemsPerPage = view === "grid" ? 30 : 12
 
-  const totalPages = Math.ceil(popularBooks.length / itemsPerPage)
-  const paginatedBooks = popularBooks.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
+  const totalPages = Math.ceil(
+    (popularBooks ? popularBooks.length : itemsPerPage) / itemsPerPage
   )
+
+  const paginatedBooks = popularBooks
+    ? popularBooks.slice((page - 1) * itemsPerPage, page * itemsPerPage)
+    : null
 
   return (
     <Container>

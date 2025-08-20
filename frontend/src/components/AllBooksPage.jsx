@@ -20,7 +20,6 @@ const AllBooksPage = () => {
   const [totalPages, setTotalPages] = useState()
   let view = useSelector(({ books }) => books.view)
   const dispatch = useDispatch()
-  console.log("view:", view)
 
   useEffect(() => {
     setTotalPages(Math.floor(totalBooks / limit))
@@ -33,7 +32,6 @@ const AllBooksPage = () => {
     }
     fn()
   }, [page, limit])
-  console.log(page, totalPages)
 
   return (
     <Container

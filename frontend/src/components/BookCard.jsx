@@ -13,30 +13,27 @@ const BookCard = ({
   target = null,
 }) => {
   return (
-    <Grid
-      component={target ? "a" : Link}
-      href={target ? `/book/${book.bookId}` : ``}
-      to={target ? "" : `/book/${book.bookId}`}
-      target={target}
-      key={book.bookId}
-      sx={{
-        px: 2,
-        mt: 5,
-        width: "100%",
-        maxWidth: "1000px",
-        "&:hover": {
-          transform: "scale(1.05)",
-          color: "gold",
-        },
-        transition: "transform 0.3s ease, letter-spacing 0.3s ease",
-        textDecoration: "inherit",
-      }}
-    >
+    <Box>
       <Card
+        component={target ? "a" : Link}
+        href={target ? `/book/${book.bookId}` : ``}
+        to={target ? "" : `/book/${book.bookId}`}
+        target={target}
+        key={book.bookId}
         sx={{
           display: "flex",
           flexDirection: { xs: "column", sm: "row" },
           height: cardHeight,
+          px: 2,
+          mt: 5,
+          width: "100%",
+          maxWidth: "1000px",
+          "&:hover": {
+            transform: "scale(1.05)",
+            color: "gold",
+          },
+          transition: "transform 0.3s ease, letter-spacing 0.3s ease",
+          textDecoration: "inherit",
         }}
       >
         <CardMedia
@@ -63,7 +60,7 @@ const BookCard = ({
           </CardContent>
         </Box>
       </Card>
-    </Grid>
+    </Box>
   )
 }
 

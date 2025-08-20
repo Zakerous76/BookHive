@@ -42,6 +42,28 @@ const MostPopularBooksCard = () => {
     }
   }, [mostPopularBooks])
 
+  if (!mostPopularBooks) {
+    return (
+      <Box
+        sx={{
+          mt: "10px",
+          mb: "10px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <Typography
+          variant="h2"
+          sx={{ textAlign: "center", fontStyle: "italic" }}
+        >
+          Unfortunately, the servers are down at the moment...
+        </Typography>
+      </Box>
+    )
+  }
+
   return (
     <div>
       <Box
@@ -57,6 +79,7 @@ const MostPopularBooksCard = () => {
         <Typography variant="h2" sx={{ textAlign: "center" }}>
           Most Popular Books of the Month
         </Typography>
+
         <Box
           component={Link}
           to="/popular-books"

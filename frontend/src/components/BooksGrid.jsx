@@ -6,14 +6,29 @@ import ListSubheader from "@mui/material/ListSubheader"
 import React from "react"
 import { Link } from "react-router-dom"
 
-const BooksGrid = ({ booksList, target }) => {
+const BooksGrid = ({
+  booksList,
+  target,
+  subheader = "This month's most downloaded books",
+}) => {
+  if (!booksList) {
+    return (
+      <Card sx={{ width: "95%", maxWidth: 1200 }}>
+        <ImageList sx={{ px: 2 }} cols={3} gap={16}>
+          <ImageListItem key="subheader" cols={3}>
+            <ListSubheader component="div">
+              {`Could not fetch books`}
+            </ListSubheader>
+          </ImageListItem>
+        </ImageList>
+      </Card>
+    )
+  }
   return (
     <Card sx={{ width: "95%", maxWidth: 1200 }}>
       <ImageList sx={{ px: 2 }} cols={3} gap={16}>
         <ImageListItem key="subheader" cols={3}>
-          <ListSubheader component="div">
-            This month's most downloaded books
-          </ListSubheader>
+          <ListSubheader component="div">{subheader}</ListSubheader>
         </ImageListItem>
         {booksList.map((book) => (
           <ImageListItem

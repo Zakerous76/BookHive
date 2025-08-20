@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import { useSelector } from "react-redux"
+import BeesBackground from "../shared-theme/BeesBackground"
 
 const WelcomeCard = () => {
   const totalBooks = useSelector(({ books }) => books.totalBooks)
@@ -41,12 +42,20 @@ const WelcomeCard = () => {
           BookHive!
         </Typography>
       </Typography>
-      <Typography variant="em" sx={{ fontSize: "1rem", fontStyle: "italic" }}>
+      <Typography
+        variant="em"
+        sx={{ mt: "0.5rem", fontSize: "1rem", fontStyle: "italic" }}
+      >
         Your #1 Stop for downloading free e-books
       </Typography>
       <Typography
         variant="p"
-        sx={{ pt: "30px", fontSize: "1rem", width: "70%", textAlign: "center" }}
+        sx={{
+          pt: "30px",
+          fontSize: "1rem",
+          width: "70%",
+          textAlign: "center",
+        }}
       >
         Here at
         <Typography
@@ -86,8 +95,19 @@ const WelcomeCard = () => {
         variant="p"
         sx={{ mt: "4rem", fontSize: "1.5rem", textAlign: "center" }}
       >
-        Total books in the library:{" "}
-        <Typography variant="span" sx={{ fontWeight: "1000" }}>
+        Total books in the library{" "}
+        <Typography
+          variant="span"
+          sx={(theme) => ({
+            display: "block",
+            fontWeight: "1000",
+            fontSize: "2rem",
+            color:
+              theme.palette.mode === "dark"
+                ? "gold" // lighter glow on dark
+                : "#ffb300ff", // deeper gold on light
+          })}
+        >
           {totalBooks}
         </Typography>
       </Typography>

@@ -21,6 +21,7 @@ import DownloadLinks from "./DownloadLinks"
 const BookPage = () => {
   const { bookId } = useMatch("/book/:bookId").params
   const dispatch = useDispatch()
+  window.scrollTo({ top: 0, behavior: "smooth" })
 
   const book = useSelector((state) => state.books.activeBook)
   const [newReview, setNewReview] = useState("")
@@ -44,8 +45,10 @@ const BookPage = () => {
       setSubmitting(false)
     }
   }
+  console.log(book)
 
-  if (!book) return <div>Loading book...</div>
+  if (!book || book.error)
+    return <Typography variant="h4">loading...</Typography>
 
   return (
     <Stack
