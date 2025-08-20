@@ -12,6 +12,8 @@ import BooksGrid from "./BooksGrid"
 import Stack from "@mui/material/Stack"
 
 const MostPopularBooksPage = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+
   const [view, setView] = useState("grid")
   let popularBooks = useSelector(({ books }) => books.mostPopularBooks)
 

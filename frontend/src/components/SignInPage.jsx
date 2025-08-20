@@ -60,6 +60,8 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }))
 
 export default function SignInPage(props) {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+
   const [usernameError, setUsernameError] = useState(false)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("")
   const [passwordError, setPasswordError] = useState(false)

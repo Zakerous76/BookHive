@@ -5,6 +5,8 @@ import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 
 const AboutPage = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+
   return (
     <Stack
       spacing={6}

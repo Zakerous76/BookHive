@@ -10,6 +10,8 @@ import BookOfTheMomentCard from "./BookOfTheMomentCard"
 import AboutCard from "./AboutCard"
 
 const HomePage = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+
   return (
     <Container>
       <NavigationBar />

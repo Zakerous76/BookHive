@@ -20,6 +20,7 @@ const AllBooksPage = () => {
   const [totalPages, setTotalPages] = useState()
   let view = useSelector(({ books }) => books.view)
   const dispatch = useDispatch()
+  window.scrollTo({ top: 0, behavior: "smooth" })
 
   useEffect(() => {
     setTotalPages(Math.floor(totalBooks / limit))
@@ -86,7 +87,6 @@ const AllBooksPage = () => {
           page={page}
           onChange={(event, value) => {
             setPage(value)
-            window.scrollTo({ top: 0, behavior: "smooth" })
           }}
         />
         {view === "grid" ? (
@@ -100,7 +100,6 @@ const AllBooksPage = () => {
         page={page}
         onChange={(event, value) => {
           setPage(value)
-          window.scrollTo({ top: 0, behavior: "smooth" })
         }}
       />
     </Container>

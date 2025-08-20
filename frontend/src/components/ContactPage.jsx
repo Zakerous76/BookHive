@@ -2,6 +2,8 @@ import { Stack, Typography, Link, Box } from "@mui/material"
 import { hoverTransition } from "../shared-theme/themePrimitives"
 
 const ContactPage = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+
   return (
     <Stack
       spacing={3}

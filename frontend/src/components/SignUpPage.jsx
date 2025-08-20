@@ -60,6 +60,8 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
 }))
 
 export default function SignUpPage(props) {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+
   const [usernameError, setUsernameError] = useState(false)
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("")
   const [emailError, setEmailError] = useState(false)
