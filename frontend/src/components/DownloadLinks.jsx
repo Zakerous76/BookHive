@@ -35,7 +35,6 @@ const DownloadLinks = ({ formats }) => {
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
         {downloadFormats.map(([type, url]) => {
           // simplify label
-          console.log("type:", type)
           const label = type.includes("epub")
             ? "EPUB"
             : type.includes("mobi")

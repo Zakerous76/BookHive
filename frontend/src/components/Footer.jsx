@@ -5,7 +5,6 @@ import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
 import { Link } from "react-router-dom"
 import IconButton from "@mui/material/IconButton"
-import XIcon from "@mui/icons-material/X"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import { useColorScheme } from "@mui/material/styles"
 import { hoverTransition } from "../shared-theme/themePrimitives"
@@ -66,8 +65,8 @@ const Footer = () => {
           {/* Middle: Nav Links */}
           <Stack direction="row" spacing={3}>
             <Box
-              component={"a"}
-              href="/all-books"
+              component={Link}
+              to="/all-books"
               sx={{
                 color: "inherit",
                 textDecoration: "inherit",
@@ -77,8 +76,8 @@ const Footer = () => {
               All Books
             </Box>
             <Box
-              component={"a"}
-              href="/popular-books"
+              component={Link}
+              to="/popular-books"
               sx={{
                 color: "inherit",
                 textDecoration: "inherit",
@@ -89,8 +88,8 @@ const Footer = () => {
             </Box>
 
             <Box
-              component={"a"}
-              href="/about"
+              component={Link}
+              to="/about"
               sx={{
                 color: "inherit",
                 textDecoration: "inherit",
@@ -100,8 +99,8 @@ const Footer = () => {
               About
             </Box>
             <Box
-              component={"a"}
-              href="/contact"
+              component={Link}
+              to="/contact"
               sx={{
                 color: "inherit",
                 textDecoration: "inherit",
