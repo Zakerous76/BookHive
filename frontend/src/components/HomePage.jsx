@@ -7,6 +7,7 @@ import MostPopularBooksCard from "./MostPopularBooksCard"
 import Divider from "@mui/material/Divider"
 import Box from "@mui/material/Box"
 import BookOfTheMomentCard from "./BookOfTheMomentCard"
+import AboutCard from "./AboutCard"
 
 const HomePage = () => {
   return (
@@ -29,6 +30,7 @@ const HomePage = () => {
         <Divider sx={{ borderBottomWidth: 4 }} />
         <BookOfTheMomentCard />
         <Divider sx={{ borderBottomWidth: 4 }} />
+        <AboutCard />
       </Stack>
     </Container>
   )

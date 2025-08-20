@@ -8,7 +8,6 @@ import HomePage from "./components/HomePage"
 import AllBooksPage from "./components/AllBooksPage"
 import MostPopularBooksPage from "./components/MostPopularBooksPage"
 import UserPage from "./components/UserPage"
-import About from "./components/About"
 import NavigationBar from "./components/NavigationBar"
 import { useDispatch } from "react-redux"
 import { initializeUser } from "./reducers/userReducer"
@@ -17,6 +16,8 @@ import BookPage from "./components/BookPage"
 import { useEffect } from "react"
 import Footer from "./components/Footer"
 import BeesBackground from "./shared-theme/BeesBackground"
+import AboutPage from "./components/AboutPage"
+import ContactPage from "./components/ContactPage"
 
 const App = (props) => {
   const dispatch = useDispatch()
@@ -24,7 +25,7 @@ const App = (props) => {
   useEffect(() => {
     dispatch(initializeUser())
     dispatch(initializeBooks())
-  }, [])
+  }, [dispatch])
 
   const location = useLocation()
   const hideNavbarRoutes = ["/sign-in", "/sign-up"]
@@ -45,7 +46,8 @@ const App = (props) => {
           <Route path="/all-books" element={<AllBooksPage />} />
           <Route path="/popular-books" element={<MostPopularBooksPage />} />
           <Route path="/book/:bookId" element={<BookPage />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </BackgroundContainer>
 
