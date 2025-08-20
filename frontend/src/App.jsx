@@ -16,6 +16,7 @@ import { initializeBooks } from "./reducers/booksReducer"
 import BookPage from "./components/BookPage"
 import { useEffect } from "react"
 import Footer from "./components/Footer"
+import BeesBackground from "./shared-theme/BeesBackground"
 
 const App = (props) => {
   const dispatch = useDispatch()
@@ -33,6 +34,7 @@ const App = (props) => {
     <AppTheme {...props}>
       {shouldHideNavbar && <NavigationBar />}
       <CssBaseline enableColorScheme />
+      <BeesBackground />
 
       <BackgroundContainer>
         <Routes>
@@ -46,6 +48,7 @@ const App = (props) => {
           <Route path="/about" element={<About />} />
         </Routes>
       </BackgroundContainer>
+
       <Footer />
     </AppTheme>
   )
