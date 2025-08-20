@@ -8,14 +8,18 @@ import Divider from "@mui/material/Divider"
 import Box from "@mui/material/Box"
 import BookOfTheMomentCard from "./BookOfTheMomentCard"
 import AboutCard from "./AboutCard"
+import BeesBackground from "../shared-theme/BeesBackground"
 
 const HomePage = () => {
   window.scrollTo({ top: 0, behavior: "smooth" })
 
   return (
     <Container>
+      <BeesBackground />
+
       <NavigationBar />
       <Toolbar />
+
       <Stack
         gap={5}
         sx={{
