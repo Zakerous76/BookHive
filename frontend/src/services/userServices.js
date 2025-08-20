@@ -1,10 +1,12 @@
 import axios from "axios"
+import reviewServices from "./reviewServices"
 const baseURL = "/api/user"
 
 const login = async (credentials) => {
   try {
-    const response = await axios.post(`${baseURL}/login`, credentials)
-    return response.data
+    const token = (await axios.post(`${baseURL}/login`, credentials)).data
+    reviewServices.setToken(token.token)
+    return token
   } catch (error) {
     return error
   }

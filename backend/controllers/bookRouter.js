@@ -80,7 +80,13 @@ bookRouter.get("/all-books", async (req, res) => {
 bookRouter.get("/:bookId", async (req, res) => {
   const bookId = req.params.bookId
   try {
-    const book = await Book.findOne({ bookId })
+    const book = await Book.findOne({ bookId }).populate({
+      path: "reviews",
+      populate: {
+        path: "userId",
+        select: "username",
+      },
+    })
     if (book) {
       return res.status(200).json(book)
     }
