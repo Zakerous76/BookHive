@@ -1,51 +1,31 @@
-import React, { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useMatch } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { setActiveBook } from "../reducers/booksReducer"
-import bookServices from "../services/bookServices"
 
-import Box from "@mui/material/Box"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
 import Divider from "@mui/material/Divider"
-import TextField from "@mui/material/TextField"
-import Button from "@mui/material/Button"
-import List from "@mui/material/List"
-import ListItem from "@mui/material/ListItem"
-import ListItemText from "@mui/material/ListItemText"
 import Stack from "@mui/material/Stack"
 import DownloadLinks from "./DownloadLinks"
+import ReviewsSection from "./ReviewSection"
+import { bookhiveUserToken } from "../utils/constants"
 
 const BookPage = () => {
   const { bookId } = useMatch("/book/:bookId").params
   const dispatch = useDispatch()
+  const userToken = window.localStorage.getItem(bookhiveUserToken)
   window.scrollTo({ top: 0, behavior: "smooth" })
 
   const book = useSelector((state) => state.books.activeBook)
-  const [newReview, setNewReview] = useState("")
-  const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
     if (!book || Number(book.bookId) !== Number(bookId)) {
       dispatch(setActiveBook(bookId)) // assumes it fetches book + reviews
     }
   }, [bookId, book, dispatch])
-
-  const handleAddReview = async () => {
-    if (!newReview.trim()) return
-    try {
-      setSubmitting(true)
-      await bookServices.addReview(bookId, { text: newReview })
-      setNewReview("")
-      // refresh book after adding review
-      dispatch(setActiveBook(bookId))
-    } finally {
-      setSubmitting(false)
-    }
-  }
-  console.log(book)
 
   if (!book || book.error)
     return <Typography variant="h4">loading...</Typography>
@@ -101,45 +81,13 @@ const BookPage = () => {
       </Card>
 
       {/* Reviews Section */}
-      <Box sx={{ maxWidth: 800, width: "100%" }}>
-        <Typography variant="h5" sx={{ mb: 2 }}>
-          Reviews
-        </Typography>
-        {book.reviews?.length ? (
-          <List>
-            {book.reviews.map((review) => (
-              <ListItem
-                key={review._id}
-                sx={{ borderBottom: "1px solid #ddd" }}
-              >
-                <ListItemText primary={review.text} />
-              </ListItem>
-            ))}
-          </List>
-        ) : (
-          <Typography variant="body2" color="text.secondary">
-            No reviews yet. Be the first to add one!
-          </Typography>
-        )}
 
-        <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
-          <TextField
-            fullWidth
-            label="Write a review..."
-            value={newReview}
-            onChange={(e) => setNewReview(e.target.value)}
-            multiline
-            minRows={2}
-          />
-          <Button
-            variant="contained"
-            onClick={handleAddReview}
-            disabled={submitting}
-          >
-            {submitting ? "Posting..." : "Post"}
-          </Button>
-        </Box>
-      </Box>
+      <ReviewsSection
+        book={book}
+        dispatch={dispatch}
+        setActiveBook={setActiveBook}
+        userToken={userToken}
+      />
     </Stack>
   )
 }
