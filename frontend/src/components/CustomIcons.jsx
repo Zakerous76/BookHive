@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 
-export function BookHiveIcon() {
+export function BookHiveIcon({ height }) {
   return (
     <Link
       to="/"
@@ -18,7 +18,7 @@ export function BookHiveIcon() {
         src="/logo.png"
         alt="Logo"
         sx={{
-          height: 42,
+          height: height || 42,
           mr: 2,
         }}
       />
