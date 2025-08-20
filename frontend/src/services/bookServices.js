@@ -7,7 +7,7 @@ const getBookCount = async () => {
     return bookCount
   } catch (error) {
     console.log(error)
-    return { error: "could not fetch book count:", status: error.status }
+    console.log({ error: "could not fetch book count:", status: error.status })
   }
 }
 
@@ -17,7 +17,10 @@ const getPopularBooks = async () => {
     return popularBooks
   } catch (error) {
     console.log(error)
-    return { error: "could not fetch popular books:", status: error.status }
+    console.log({
+      error: "could not fetch popular books:",
+      status: error.status,
+    })
   }
 }
 
@@ -30,7 +33,7 @@ const getAllBooks = async (page = 1, limit = 25) => {
     return allBooks
   } catch (error) {
     console.log(error)
-    return { error: "could not fetch all books:", status: error.status }
+    console.log({ error: "could not fetch all books:", status: error.status })
   }
 }
 
@@ -40,7 +43,7 @@ const getBook = async (bookId) => {
     return book
   } catch (error) {
     console.log(error)
-    return { error: "could not fetch book:", status: error.status }
+    console.log({ error: "could not fetch book:", status: error.status })
   }
 }
 

@@ -38,9 +38,12 @@ export const {
 
 export const initializeBooks = () => {
   return async (dispatch) => {
-    const totalBooks = (await bookServices.getBookCount()).totalBooks
-    const mostPopularBooks = await bookServices.getPopularBooks()
-    dispatch(setBooks({ totalBooks, mostPopularBooks }))
+    const totalBooksResponse = await bookServices.getBookCount()
+    if (totalBooksResponse) {
+      const totalBooks = totalBooksResponse.totalBooks
+      const mostPopularBooks = await bookServices.getPopularBooks()
+      dispatch(setBooks({ totalBooks, mostPopularBooks }))
+    }
   }
 }
 
