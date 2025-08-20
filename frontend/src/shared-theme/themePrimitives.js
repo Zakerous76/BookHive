@@ -70,6 +70,14 @@ export const red = {
   900: "hsl(0, 93%, 6%)",
 }
 
+export const hoverTransition = {
+  transition: "transform 0.2s ease, letter-spacing 0.2s ease",
+  display: "inline-block", // needed for transform to work properly
+  "&:hover": {
+    transform: "scale(1.05)",
+  },
+}
+
 export const getDesignTokens = (mode) => {
   customShadows[1] =
     mode === "dark"
