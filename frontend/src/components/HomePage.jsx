@@ -14,31 +14,40 @@ const HomePage = () => {
   window.scrollTo({ top: 0, behavior: "smooth" })
 
   return (
-    <Container>
+    <Box>
       <BeesBackground />
-
-      <NavigationBar />
-      <Toolbar />
-
-      <Stack
-        gap={5}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          width: "100%",
-        }}
+      <Container
+        sx={(theme) => ({
+          padding: theme.spacing(2),
+          [theme.breakpoints.up("sm")]: {
+            padding: theme.spacing(4),
+          },
+        })}
       >
-        <Box sx={{ mt: "100px", mb: "30px" }}>
-          <WelcomeCard />
-        </Box>
-        <Divider sx={{ borderBottomWidth: 4 }} />
-        <MostPopularBooksCard />
-        <Divider sx={{ borderBottomWidth: 4 }} />
-        <BookOfTheMomentCard />
-        <Divider sx={{ borderBottomWidth: 4 }} />
-        <AboutCard />
-      </Stack>
-    </Container>
+        <NavigationBar />
+        <Toolbar />
+
+        <Stack
+          gap={10}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          <Box sx={{ mt: "170px", mb: "100px" }}>
+            <WelcomeCard />
+          </Box>
+          <Divider sx={{ borderBottomWidth: 4 }} />
+          <MostPopularBooksCard />
+          <Divider sx={{ borderBottomWidth: 4 }} />
+          <BookOfTheMomentCard />
+          <Divider sx={{ borderBottomWidth: 4 }} />
+          <AboutCard />
+          <Divider sx={{ mt: 4, borderBottomWidth: 4 }} />
+        </Stack>
+      </Container>
+    </Box>
   )
 }
 

@@ -6,10 +6,7 @@ import { styled } from "@mui/material/styles"
 const Container = styled(Stack)(({ theme }) => ({
   position: "relative",
   minHeight: "100vh",
-  padding: theme.spacing(2),
-  [theme.breakpoints.up("sm")]: {
-    padding: theme.spacing(4),
-  },
+
   "&::before": {
     content: '""',
     display: "block",

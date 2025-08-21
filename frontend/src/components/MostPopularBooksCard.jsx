@@ -46,8 +46,7 @@ const MostPopularBooksCard = () => {
     return (
       <Box
         sx={{
-          mt: "10px",
-          mb: "10px",
+          my: "10px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
