@@ -14,9 +14,8 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 import ColorModeIconDropdown from "../shared-theme/ColorModeIconDropdown"
 import Stack from "@mui/material/Stack"
 import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { BookHiveIcon } from "./CustomIcons"
-import { logoutUser } from "../reducers/userReducer"
 import UserPageButton from "../shared-theme/UserPageButton"
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({

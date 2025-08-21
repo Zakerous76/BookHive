@@ -104,8 +104,6 @@ const MostPopularBooksCard = () => {
       <Box></Box>
       <Box sx={{ mt: "50px", mb: "50px" }}>
         <Carousel
-          swipeable={false}
-          draggable={false}
           showDots={true}
           responsive={responsive}
           ssr={true}
