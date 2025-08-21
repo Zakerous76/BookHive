@@ -38,7 +38,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 export default function NavigationBar(props) {
   const [open, setOpen] = React.useState(false)
 
-  const user = useSelector(({ user }) => user.user)
+  const user = useSelector(({ user }) => user?.user)
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen)
@@ -175,7 +175,7 @@ export default function NavigationBar(props) {
               width: "100%",
             }}
           >
-            <BookHiveIcon text={true} />
+            <BookHiveIcon text={false} />
             <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
               <UserPageButton size="medium" />
 

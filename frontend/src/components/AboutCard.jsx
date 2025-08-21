@@ -15,7 +15,13 @@ const AboutCard = () => {
       <Typography variant="h2" sx={{ textAlign: "center" }}>
         About
       </Typography>
-      <Box sx={{ display: "flex" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" }, // ⬅️ This is the key change
+          gap: { xs: 3, md: 0 },
+        }}
+      >
         <Box
           sx={{
             flex: "1",
@@ -29,6 +35,7 @@ const AboutCard = () => {
               fontFamily: "Satisfy",
               fontWeight: "1000",
               fontSize: "4rem",
+
               color:
                 theme.palette.mode === "dark"
                   ? "gold" // lighter glow on dark

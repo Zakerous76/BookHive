@@ -25,7 +25,7 @@ export function BookHiveText({ otherText = "BookHive!" }) {
   )
 }
 
-export function BookHiveIcon({ height }) {
+export function BookHiveIcon({ text = true, height }) {
   return (
     <Link
       to="/"
@@ -44,18 +44,20 @@ export function BookHiveIcon({ height }) {
           mr: 2,
         }}
       />
-      <Typography
-        component="span"
-        variant="h3"
-        sx={{
-          fontFamily: "satisfy",
-          pr: "10px",
-          fontWeight: "600",
-          color: "text.primary", // auto-switches between light/dark
-        }}
-      >
-        BookHive
-      </Typography>
+      {text && (
+        <Typography
+          component="span"
+          variant="h3"
+          sx={{
+            fontFamily: "satisfy",
+            pr: "10px",
+            fontWeight: "600",
+            color: "text.primary", // auto-switches between light/dark
+          }}
+        >
+          BookHive
+        </Typography>
+      )}
     </Link>
   )
 }

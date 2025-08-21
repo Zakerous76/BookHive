@@ -33,7 +33,7 @@ const ContactPage = () => {
 
       <Stack direction="column" spacing={1} alignItems="center">
         <Link
-          href="mailto:m.z.humayoon@example.com"
+          href="mailto:m.z.humayoon@gmail.com"
           underline="hover"
           sx={{
             fontWeight: "500",

@@ -26,9 +26,11 @@ export const { setUser, toggleFavoriteAction } = userSlice.actions
 export const initializeUser = () => {
   return async (dispatch) => {
     const userToken = window.localStorage.getItem(bookhiveUserToken)
-    const user = await userServices.getUser(userToken)
+    if (userToken) {
+      const user = await userServices.getUser(userToken)
 
-    dispatch(setUser({ user, token: userToken }))
+      dispatch(setUser({ user, token: userToken }))
+    }
   }
 }
 

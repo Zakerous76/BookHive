@@ -22,10 +22,10 @@ const BookCard = ({
         sx={{
           display: "flex",
           flexDirection: { xs: "column", sm: "row" },
-          height: cardHeight,
           px: 2,
           mt: 5,
-          width: "100%",
+          mx: "auto",
+          width: { xs: "90%", sm: "100%" },
           maxWidth: "1000px",
           "&:hover": {
             transform: "scale(1.05)",
