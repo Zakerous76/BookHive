@@ -2,6 +2,15 @@ import axios from "axios"
 import reviewServices from "./reviewServices"
 const baseURL = "/api/user"
 
+let token = null
+let config = null
+const setToken = (newToken) => {
+  token = `Bearer ${newToken}`
+  config = {
+    headers: { authorization: token },
+  }
+}
+
 const login = async (credentials) => {
   try {
     const token = (await axios.post(`${baseURL}/login`, credentials)).data
@@ -26,7 +35,18 @@ const createUser = async (userInfo) => {
   }
 }
 
+const getUser = async (userToken) => {
+  setToken(userToken)
+  const response = await axios.get(baseURL, config)
+  if (response.status == 200) {
+    return response.data
+  }
+  console.log(response)
+  return null
+}
+
 export default {
   login,
   createUser,
+  getUser,
 }

@@ -4,15 +4,8 @@ const jwt = require("jsonwebtoken")
 const JWT_SECRET = require("../utils/config").JWT_SECRET
 const User = require("../models/user")
 const Book = require("../models/book")
-
-const getTokenFrom = (request) => {
-  const authorization = request.get("authorization")
-  console.log("authorization: ", authorization)
-  if (authorization && authorization.startsWith("Bearer")) {
-    return authorization.replace("Bearer ", "").trim()
-  }
-  return null
-}
+const { getTokenFrom } = require("../utils/getTokenFrom")
+const decodeToken = require("../utils/jwtVerification")
 
 reviewRouter.get("/all-reviews", async (req, res) => {
   try {
@@ -39,21 +32,21 @@ reviewRouter.get("/:bookId", async (req, res) => {
 reviewRouter.post("/create", async (req, res) => {
   try {
     const body = req.body
-    const decodedToken = jwt.verify(getTokenFrom(req), JWT_SECRET)
 
-    if (!decodedToken.userId) {
+    const decodedToken = decodeToken(req)
+    if (!decodedToken) {
       return res.status(401).json({ error: "token invalid" })
     }
-
     const user = await User.findById(decodedToken.userId)
 
     if (!user) {
       return res.status(400).json({ error: "userId missing or invalid" })
     }
+    const userId = user._id
 
     const newReview = {
       bookId: body.bookId,
-      userId: user._id,
+      userId,
       rating: body.rating,
       text: body.text,
     }
@@ -62,19 +55,26 @@ reviewRouter.post("/create", async (req, res) => {
 
     const savedReview = await Review.updateOne(
       {
-        userId: body.userId,
+        userId,
         bookId: body.bookId,
       },
       { $set: newReview },
-      { upsert: true }
+      { upsert: true, new: true }
     )
-    console.log("SavedReview:", savedReview)
 
     if (savedReview.upsertedId) {
-      const theBook = await Book.findOne({ bookId: body.bookId })
-      theBook.reviews.push(savedReview.upsertedId)
-      await theBook.save()
+      await Promise.all([
+        Book.updateOne(
+          { bookId: body.bookId },
+          { $addToSet: { reviews: savedReview.upsertedId } }
+        ),
+        User.updateOne(
+          { _id: userId },
+          { $addToSet: { reviews: savedReview.upsertedId } }
+        ),
+      ])
     }
+
     return res.status(201).json(savedReview)
   } catch (error) {
     return res.status(400).json(error)

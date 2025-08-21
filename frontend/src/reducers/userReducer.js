@@ -17,18 +17,21 @@ export const { setUser } = userSlice.actions
 export const initializeUser = () => {
   return async (dispatch) => {
     const userToken = window.localStorage.getItem(bookhiveUserToken)
-    dispatch(setUser(userToken))
+    console.log("userToken:", userToken)
+    const user = await userServices.getUser(userToken)
+    dispatch(setUser(user))
   }
 }
 
 export const loginUser = (credentials) => {
   return async (dispatch) => {
     const response = await userServices.login(credentials)
+    console.log("response:", response)
     if (response.token) {
-      dispatch(setUser({ ...credentials, token: response.token }))
+      console.log("credentials:", credentials)
+      dispatch(setUser(response))
       window.localStorage.setItem(bookhiveUserToken, response.token)
     }
-    return response
   }
 }
 

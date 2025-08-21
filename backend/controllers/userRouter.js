@@ -4,11 +4,14 @@ const User = require("../models/user")
 
 const jwt = require("jsonwebtoken")
 const { JWT_SECRET } = require("../utils/config")
+const decodeToken = require("../utils/jwtVerification")
 
 userRouter.post("/login", async (req, res) => {
   const { username, password } = req.body
   try {
     const user = await User.findOne({ username })
+      .populate("reviews")
+      .populate("favorites")
     if (!user) {
       return res.status(404).json({ error: `"${username}" not found` })
     }
@@ -21,21 +24,25 @@ userRouter.post("/login", async (req, res) => {
     const userForToken = { username, userId: user.id, email: user.email }
     const token = jwt.sign(userForToken, JWT_SECRET)
     console.log(`Welcome, ${username}!`)
-    return res.status(200).json({ token })
+    return res.status(200).json({ user, token })
   } catch (error) {
     return res.status(404).json({ error: `${error}` })
   }
 })
 
 userRouter.get("/", async (req, res) => {
-  const users = await User.find({}).populate("reviews")
-  return res.status(200).json(users)
-})
-
-userRouter.get("/:id", async (req, res) => {
-  const userId = req.params.id
+  const decodedToken = decodeToken(req)
+  if (!decodedToken) {
+    return res.status(401).json({ error: "token invalid" })
+  }
   try {
-    const user = await User.find({ _id: userId }).populate("reviews")
+    const user = await User.findById(decodedToken.userId)
+      .populate("reviews")
+      .populate("favorites")
+    if (!user) {
+      return res.status(400).json({ error: "userId missing or invalid" })
+    }
+
     return res.status(200).json(user)
   } catch (error) {
     return res.status(404).json(error)
@@ -60,5 +67,21 @@ userRouter.post("/create", async (req, res) => {
     res.status(400).json(error)
   }
 })
+
+// For debug
+// userRouter.get("/", async (req, res) => {
+//   const users = await User.find({}).populate("reviews")
+//   return res.status(200).json(users)
+// })
+
+// userRouter.get("/:id", async (req, res) => {
+//   const userId = req.params.id
+//   try {
+//     const user = await User.find({ _id: userId }).populate("reviews")
+//     return res.status(200).json(user)
+//   } catch (error) {
+//     return res.status(404).json(error)
+//   }
+// })
 
 module.exports = userRouter
