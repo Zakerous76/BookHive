@@ -12,11 +12,12 @@ import Drawer from "@mui/material/Drawer"
 import MenuIcon from "@mui/icons-material/Menu"
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 import ColorModeIconDropdown from "../shared-theme/ColorModeIconDropdown"
+import Stack from "@mui/material/Stack"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { BookHiveIcon } from "./CustomIcons"
 import { logoutUser } from "../reducers/userReducer"
-import Stack from "@mui/material/Stack"
+import UserPageButton from "../shared-theme/UserPageButton"
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
@@ -38,14 +39,9 @@ export default function NavigationBar(props) {
   const [open, setOpen] = React.useState(false)
 
   const user = useSelector(({ user }) => user)
-  const dispatch = useDispatch()
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen)
-  }
-
-  const handleLogOut = () => {
-    dispatch(logoutUser())
   }
 
   return (
@@ -121,15 +117,16 @@ export default function NavigationBar(props) {
             >
               <Button
                 component={Link}
-                to="/"
+                to="/sign-out"
                 color="error"
                 variant="contained"
                 size="small"
-                onClick={handleLogOut}
               >
-                Log out
+                Sign Out
               </Button>
-              <ColorModeIconDropdown />
+              <UserPageButton size="medium" />
+
+              <ColorModeIconDropdown size="medium" />
             </Box>
           ) : (
             <Box
@@ -171,6 +168,8 @@ export default function NavigationBar(props) {
           >
             <BookHiveIcon text={true} />
             <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+              <UserPageButton size="medium" />
+
               <ColorModeIconDropdown size="medium" />
               <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
                 <MenuIcon />
@@ -245,14 +244,13 @@ export default function NavigationBar(props) {
                     <MenuItem>
                       <Button
                         component={Link}
-                        to="/"
+                        to="/sign-out"
                         color="error"
                         variant="contained"
                         size="small"
-                        onClick={handleLogOut}
                         sx={{ width: "100%" }}
                       >
-                        Log out
+                        LSign Out
                       </Button>
                     </MenuItem>
                   ) : (

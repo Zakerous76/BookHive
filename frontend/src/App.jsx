@@ -17,6 +17,7 @@ import { useEffect } from "react"
 import Footer from "./components/Footer"
 import AboutPage from "./components/AboutPage"
 import ContactPage from "./components/ContactPage"
+import SignOutUser from "./components/SignOutUser"
 
 const App = (props) => {
   const dispatch = useDispatch()
@@ -46,6 +47,7 @@ const App = (props) => {
           <Route path="/book/:bookId" element={<BookPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/sign-out" element={<SignOutUser />} />
         </Routes>
       </BackgroundContainer>
 
