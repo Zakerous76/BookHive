@@ -35,7 +35,7 @@ const HomePage = () => {
             width: "100%",
           }}
         >
-          <Box sx={{ mt: "170px", mb: "100px" }}>
+          <Box sx={{ mt: "120px", mb: "100px" }}>
             <WelcomeCard />
           </Box>
           <Divider sx={{ borderBottomWidth: 4 }} />
@@ -44,7 +44,7 @@ const HomePage = () => {
           <BookOfTheMomentCard />
           <Divider sx={{ borderBottomWidth: 4 }} />
           <AboutCard />
-          <Divider sx={{ mt: 4, borderBottomWidth: 4 }} />
+          <Divider sx={{ mb: 2, borderBottomWidth: 4 }} />
         </Stack>
       </Container>
     </Box>

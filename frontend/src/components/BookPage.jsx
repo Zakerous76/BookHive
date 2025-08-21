@@ -12,6 +12,8 @@ import Stack from "@mui/material/Stack"
 import DownloadLinks from "./DownloadLinks"
 import ReviewsSection from "./ReviewSection"
 import { bookhiveUserToken } from "../utils/constants"
+import FavoriteButton from "./FavoriteButton"
+import { Container } from "@mui/material"
 
 const BookPage = () => {
   const { bookId } = useMatch("/book/:bookId").params
@@ -31,64 +33,77 @@ const BookPage = () => {
     return <Typography variant="h4">loading...</Typography>
 
   return (
-    <Stack
-      gap={3}
-      sx={{
-        mt: "100px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        px: 2,
-      }}
-    >
-      <Typography variant="h4">{book.title}</Typography>
+    <Container>
+      <Stack
+        gap={3}
+        sx={{
+          mt: "100px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
 
-      <CardMedia
-        component="img"
-        sx={{ width: { xs: "100%", sm: 250 }, objectFit: "cover" }}
-        image={book.formats["image/jpeg"]}
-        alt={book.title}
-      />
-      <DownloadLinks formats={book.formats} />
+          px: 2,
+        }}
+      >
+        <Typography variant="h4" textAlign={"center"}>
+          {book.title}
+        </Typography>
 
-      {/* Book Info Card */}
-      <Card sx={{ display: "flex", maxWidth: 1000, width: "100%", mb: 4 }}>
-        <CardContent sx={{ flex: 1 }}>
-          <Typography variant="h4">{book.title}</Typography>
-          <Typography variant="subtitle1" color="text.secondary">
-            {book.authors?.map((a) => a.name).join(", ") || "Unknown Author"}
-          </Typography>
-          <Typography variant="body1" sx={{ mt: 2, textAlign: "justify" }}>
-            {book.summaries?.[0] || "No summary available."}
-          </Typography>
-          <Typography
-            variant="caption"
-            sx={{ fontStyle: "italic", color: "gray", mt: 2, display: "block" }}
-          >
-            Downloaded {book.download_count} times
-          </Typography>
-          <Divider sx={{ my: 2 }} />
-          <Typography variant="body2" color="text.secondary">
-            Subjects: {book.subjects?.join(", ") || "—"}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Languages: {book.languages?.join(", ") || "—"}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Copyright: {book.copyright ? "Yes" : "No"}
-          </Typography>
-        </CardContent>
-      </Card>
+        <CardMedia
+          component="img"
+          sx={{ width: { xs: "100%", sm: 250 }, objectFit: "cover" }}
+          image={book.formats["image/jpeg"]}
+          alt={book.title}
+        />
+        {/* Favorite button */}
+        <FavoriteButton book={book} />
 
-      {/* Reviews Section */}
+        <DownloadLinks formats={book.formats} />
 
-      <ReviewsSection
-        book={book}
-        dispatch={dispatch}
-        setActiveBook={setActiveBook}
-        userToken={userToken}
-      />
-    </Stack>
+        {/* Book Info Card */}
+        <Card sx={{ display: "flex", maxWidth: 1000, width: "100%", mb: 4 }}>
+          <CardContent sx={{ flex: 1 }}>
+            <Typography variant="h4">{book.title}</Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              {book.authors?.map((a) => a.name).join(", ") || "Unknown Author"}
+            </Typography>
+            <Typography variant="body1" sx={{ mt: 2, textAlign: "justify" }}>
+              {book.summaries?.[0] || "No summary available."}
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{
+                fontStyle: "italic",
+                color: "gray",
+                mt: 2,
+                display: "block",
+              }}
+            >
+              Downloaded {book.download_count} times
+            </Typography>
+            <Divider sx={{ my: 2 }} />
+            <Typography variant="body2" color="text.secondary">
+              Subjects: {book.subjects?.join(", ") || "—"}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Languages: {book.languages?.join(", ") || "—"}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Copyright: {book.copyright ? "Yes" : "No"}
+            </Typography>
+          </CardContent>
+        </Card>
+
+        {/* Reviews Section */}
+
+        <ReviewsSection
+          book={book}
+          dispatch={dispatch}
+          setActiveBook={setActiveBook}
+          userToken={userToken}
+        />
+      </Stack>
+    </Container>
   )
 }
 

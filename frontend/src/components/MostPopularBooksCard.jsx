@@ -2,7 +2,7 @@ import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import "react-multi-carousel/lib/styles.css"
 import Carousel from "react-multi-carousel"
-import { isMobile, isTablet, isBrowser } from "react-device-detect"
+import { isMobile, isTablet } from "react-device-detect"
 
 const responsive = {
   desktop: {
@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { setActiveBook } from "../reducers/booksReducer"
+import FavoriteButton from "./FavoriteButton"
 
 const MostPopularBooksCard = () => {
   const dispatch = useDispatch()
@@ -186,6 +187,9 @@ const MostPopularBooksCard = () => {
                     >
                       {book.title}
                     </Box>
+                    {/* Favorite button */}
+                    <FavoriteButton book={book} />
+
                     <Box sx={{ fontSize: "14px" }}>
                       {book.authors && book.authors.length > 0
                         ? book.authors[0].name

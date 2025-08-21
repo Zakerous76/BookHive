@@ -1,5 +1,5 @@
 import { Stack, Typography, Link, Box } from "@mui/material"
-import { hoverTransition } from "../shared-theme/themePrimitives"
+import { BookHiveText } from "./CustomIcons"
 
 const ContactPage = () => {
   window.scrollTo({ top: 0, behavior: "smooth" })
@@ -24,27 +24,7 @@ const ContactPage = () => {
           fontSize: "4rem",
         })}
       >
-        Contact{" "}
-        <Typography
-          variant="h1"
-          component="span"
-          sx={(theme) => ({
-            fontFamily: "Satisfy",
-            fontWeight: "1000",
-            fontSize: "5rem",
-            color:
-              theme.palette.mode === "dark"
-                ? "gold" // lighter glow on dark
-                : "#ffb300ff", // deeper gold on light
-            textShadow: `
-                  0 0 0px ${"#f2b62bff"},
-                  0 0 30px ${"#f6ba2b"},
-                  0 0 60px ${"#fac447ff"}
-                `,
-          })}
-        >
-          Me
-        </Typography>
+        Contact <BookHiveText otherText="Me" />
       </Typography>
 
       <Typography variant="body1" sx={{ lineHeight: 1.7 }}>

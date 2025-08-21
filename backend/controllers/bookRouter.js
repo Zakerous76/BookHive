@@ -52,7 +52,6 @@ bookRouter.get("/popular-books", async (req, res) => {
 
     const books = await Book.find({}).sort({ download_count: -1 }).limit(100)
     popularCacheTimestamp = Date.now()
-    console.log(isCacheValid)
 
     popularCache = books
     return res.status(200).json(books)
@@ -74,6 +73,30 @@ bookRouter.get("/all-books", async (req, res) => {
     .skip(skip)
     .limit(limit)
   return res.json(allBooks)
+})
+
+bookRouter.get("/search", async (req, res) => {
+  const query = req.query.q
+  if (!query) {
+    return res.status(400).json({ error: "Missing search query" })
+  }
+
+  try {
+    const regex = new RegExp(query, "i") // case-insensitive
+    const books = await Book.find({
+      $or: [
+        { title: regex },
+        { "authors.name": regex },
+        { "translators.name": regex },
+        { subjects: regex },
+      ],
+    }).limit(50)
+
+    return res.status(200).json(books)
+  } catch (error) {
+    console.error("Error searching books:", error)
+    return res.status(500).json({ error: "Failed to search books" })
+  }
 })
 
 // Get the details of the book with bookId

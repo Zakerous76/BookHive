@@ -68,6 +68,43 @@ userRouter.post("/create", async (req, res) => {
   }
 })
 
+userRouter.post("/add-favorite", async (req, res) => {
+  const { book_id, userId } = req.body
+  try {
+    const user = await User.findByIdAndUpdate(userId, {
+      $addToSet: { favorites: book_id },
+    })
+
+    res
+      .status(201)
+      .json({ message: "Favorite added.", favorites: user.favorites })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: "Failed to add favorite." })
+  }
+})
+
+userRouter.post("/remove-favorite", async (req, res) => {
+  const { book_id, userId } = req.body
+
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { favorites: book_id },
+      },
+      { new: true }
+    )
+
+    res
+      .status(201)
+      .json({ message: "Favorite removed.", favorites: user.favorites })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: "Failed to remove favorite." })
+  }
+})
+
 // For debug
 // userRouter.get("/", async (req, res) => {
 //   const users = await User.find({}).populate("reviews")

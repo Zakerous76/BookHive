@@ -47,9 +47,20 @@ const getBook = async (bookId) => {
   }
 }
 
+const searchBooks = async (query) => {
+  try {
+    const results = (await axios.get(`${baseURL}/search?q=${query}`)).data
+    return results
+  } catch (error) {
+    console.log(error)
+    console.log({ error: "could not search books:", status: error.status })
+  }
+}
+
 export default {
   getAllBooks,
   getBook,
   getBookCount,
   getPopularBooks,
+  searchBooks,
 }

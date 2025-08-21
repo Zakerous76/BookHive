@@ -5,6 +5,8 @@ import { hoverTransition } from "../shared-theme/themePrimitives"
 
 import { Link as MuiLink } from "@mui/material"
 import { Link as RouterLink } from "react-router-dom"
+import { BookHiveText } from "./CustomIcons"
+import BookSearch from "./BookSearch"
 
 const WelcomeCard = () => {
   const totalBooks = useSelector(({ books }) => books.totalBooks)
@@ -26,24 +28,7 @@ const WelcomeCard = () => {
         variant="h1"
         sx={{ fontSize: "4rem", textAlign: "center" }}
       >
-        Welcome to{" "}
-        <Typography
-          component="span"
-          variant="h1"
-          sx={(theme) => ({
-            fontFamily: "Satisfy",
-            fontWeight: "1000",
-            fontSize: "4rem",
-            color: theme.palette.mode === "dark" ? "gold" : "#ffb300ff",
-            textShadow: `
-            0 0 0px ${"#f2b62bff"},
-            0 0 30px ${"#f6ba2b"},
-            0 0 60px ${"#fac447ff"}
-          `,
-          })}
-        >
-          BookHive!
-        </Typography>
+        Welcome {isLoggedIn ? "back" : ""} to <BookHiveText />
       </Typography>
 
       {/* Tagline */}
@@ -53,6 +38,8 @@ const WelcomeCard = () => {
       >
         Your #1 Stop for downloading free e-books
       </Typography>
+
+      <BookSearch />
 
       {/* Intro paragraph */}
       <Typography

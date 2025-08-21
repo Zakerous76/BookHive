@@ -38,7 +38,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 export default function NavigationBar(props) {
   const [open, setOpen] = React.useState(false)
 
-  const user = useSelector(({ user }) => user)
+  const user = useSelector(({ user }) => user.user)
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen)
@@ -103,6 +103,15 @@ export default function NavigationBar(props) {
                 sx={{ minWidth: 0 }}
               >
                 About
+              </Button>
+              <Button
+                component={Link}
+                to="/contact"
+                color="info"
+                size="small"
+                sx={{ minWidth: 0 }}
+              >
+                Contact
               </Button>
             </Box>
           </Box>
@@ -237,6 +246,15 @@ export default function NavigationBar(props) {
                     sx={{ minWidth: 0 }}
                   >
                     About
+                  </MenuItem>
+                  <MenuItem
+                    component={Link}
+                    to="/contact"
+                    color="info"
+                    size="small"
+                    sx={{ minWidth: 0 }}
+                  >
+                    Contact
                   </MenuItem>
 
                   <Divider sx={{ my: 3 }} />

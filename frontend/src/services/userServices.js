@@ -41,12 +41,29 @@ const getUser = async (userToken) => {
   if (response.status == 200) {
     return response.data
   }
-  console.log(response)
   return null
+}
+
+const addFavorite = async (book_id, userId) => {
+  try {
+    await axios.post(`${baseURL}/add-favorite`, { book_id, userId })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const removeFavorite = async (book_id, userId) => {
+  try {
+    await axios.post(`${baseURL}/remove-favorite`, { book_id, userId })
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export default {
   login,
   createUser,
   getUser,
+  addFavorite,
+  removeFavorite,
 }

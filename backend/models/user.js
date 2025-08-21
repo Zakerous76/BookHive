@@ -27,7 +27,12 @@ const userSchema = new mongoose.Schema({
     enum: ["user", "admin"], // restrict roles
     default: "user",
   },
-  favorites: [String], // array of bookId 's from the API
+  favorites: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Book", // <-- assuming you have a Book model
+    },
+  ], // array of bookId 's from the API
   reviews: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -2,7 +2,12 @@ import Grid from "@mui/material/Grid"
 import BookCard from "./BookCard"
 import Card from "@mui/material/Card"
 
-const BooksList = ({ booksList, target = null }) => {
+const BooksList = ({
+  booksList,
+  target = null,
+  cardHeight = "350px",
+  summaryLimit = 500,
+}) => {
   if (!booksList) {
     return (
       <Card
@@ -21,7 +26,13 @@ const BooksList = ({ booksList, target = null }) => {
   return (
     <Grid spacing={3} sx={{ px: 2, maxWidth: 1200 }}>
       {booksList.map((book) => (
-        <BookCard book={book} key={book.bookId} target={target} />
+        <BookCard
+          book={book}
+          key={book.bookId}
+          target={target}
+          cardHeight={cardHeight}
+          summaryLimit={summaryLimit}
+        />
       ))}
     </Grid>
   )

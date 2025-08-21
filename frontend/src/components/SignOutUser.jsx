@@ -1,17 +1,12 @@
-import React from "react"
 import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { logoutUser } from "../reducers/userReducer"
-import { Box, Stack, Typography } from "@mui/material"
+import { Button, Stack, Typography } from "@mui/material"
 
 const SignOutUser = () => {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
+  dispatch(logoutUser())
 
-  setTimeout(() => {
-    dispatch(logoutUser())
-    navigate("/sign-in")
-  }, 5000)
   return (
     <Stack
       sx={{
@@ -26,14 +21,24 @@ const SignOutUser = () => {
       }}
     >
       <Typography variant="h1" gutterBottom textAlign={"center"}>
-        Thank you for trying BookHive!
+        Thank you for trying BookHive.
       </Typography>
       <Typography variant="h4" gutterBottom textAlign={"center"}>
         Please sign in (again)!
       </Typography>
       <Typography variant="body1" textAlign={"center"}>
-        You are going to be redirected in 5 seconds to the Sign In page.
+        Wishing you a great life {`<3`}
       </Typography>
+      <Button
+        component={Link}
+        to="/sign-in"
+        color="primary"
+        variant="outlined"
+        size="large"
+        sx={{ mt: "20px" }}
+      >
+        Sign in
+      </Button>
     </Stack>
   )
 }

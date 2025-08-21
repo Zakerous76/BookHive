@@ -3,6 +3,7 @@ import Divider from "@mui/material/Divider"
 import Link from "@mui/material/Link"
 import Stack from "@mui/material/Stack"
 import Typography from "@mui/material/Typography"
+import { BookHiveText } from "./CustomIcons"
 
 const AboutPage = () => {
   window.scrollTo({ top: 0, behavior: "smooth" })
@@ -13,14 +14,15 @@ const AboutPage = () => {
       sx={{
         maxWidth: 800,
         mx: "auto",
+        mt: "100px",
         py: 8,
         px: 3,
       }}
     >
       {/* Hero Heading */}
       <Box textAlign="center">
-        <Typography variant="h3" component="h1" fontWeight="bold">
-          Welcome to BookHive
+        <Typography variant="h1" component="h1" fontWeight="bold">
+          About <BookHiveText />
         </Typography>
         <Typography variant="h6" color="text.secondary" mt={2}>
           Your buzzing home for free literature
@@ -34,7 +36,7 @@ const AboutPage = () => {
         <Typography variant="body1">
           BookHive is more than just a digital library — it’s a place where
           readers can{" "}
-          <strong>explore, download, and share timeless classics</strong>
+          <strong>explore, download, and share timeless classics </strong>
           from{" "}
           <Link
             href="https://www.gutenberg.org/"

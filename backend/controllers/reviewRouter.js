@@ -1,10 +1,7 @@
 const reviewRouter = require("express").Router()
 const Review = require("../models/review")
-const jwt = require("jsonwebtoken")
-const JWT_SECRET = require("../utils/config").JWT_SECRET
 const User = require("../models/user")
 const Book = require("../models/book")
-const { getTokenFrom } = require("../utils/getTokenFrom")
 const decodeToken = require("../utils/jwtVerification")
 
 reviewRouter.get("/all-reviews", async (req, res) => {
@@ -50,8 +47,6 @@ reviewRouter.post("/create", async (req, res) => {
       rating: body.rating,
       text: body.text,
     }
-
-    console.log("userId:", decodedToken.userId)
 
     const savedReview = await Review.updateOne(
       {

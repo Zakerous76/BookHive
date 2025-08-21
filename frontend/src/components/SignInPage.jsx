@@ -93,162 +93,164 @@ export default function SignInPage(props) {
       username: data.get("username"),
       password: data.get("password"),
     }
-    const res = await dispatch(loginUser(credentials))
-    if (res.name === "AxiosError") {
-      setPasswordError(true)
-      setPasswordErrorMessage("Wrong Username or Password")
-    }
-  }
-
-  const validateInputs = () => {
-    const username = document.getElementById("username")
-    const password = document.getElementById("password")
-
-    let isValid = true
-
-    if (!username.value || !/^[a-zA-Z0-9_]+$/.test(username.value)) {
-      setUsernameError(true)
-      setUsernameErrorMessage("Please enter a valid username.")
-      isValid = false
-    } else {
-      setUsernameError(false)
-      setUsernameErrorMessage("")
+    if (validateInputs()) {
+      const res = await dispatch(loginUser(credentials))
+      if (res.name === "AxiosError") {
+        setPasswordError(true)
+        setPasswordErrorMessage("Wrong Username or Password")
+      }
     }
 
-    if (!password.value || password.value.length < 6) {
-      setPasswordError(true)
-      setPasswordErrorMessage("Password must be at least 6 characters long.")
-      isValid = false
-    } else {
-      setPasswordError(false)
-      setPasswordErrorMessage("")
+    const validateInputs = () => {
+      const username = document.getElementById("username")
+      const password = document.getElementById("password")
+
+      let isValid = true
+
+      if (!username.value || !/^[a-zA-Z0-9_]+$/.test(username.value)) {
+        setUsernameError(true)
+        setUsernameErrorMessage("Please enter a valid username.")
+        isValid = false
+      } else {
+        setUsernameError(false)
+        setUsernameErrorMessage("")
+      }
+
+      if (!password.value || password.value.length < 6) {
+        setPasswordError(true)
+        setPasswordErrorMessage("Password must be at least 6 characters long.")
+        isValid = false
+      } else {
+        setPasswordError(false)
+        setPasswordErrorMessage("")
+      }
+
+      return isValid
     }
 
-    return isValid
-  }
-
-  return (
-    <div {...props}>
-      <SignInContainer direction="column" justifyContent="space-between">
-        <ColorModeIconDropdown
-          size="medium"
-          sx={{ position: "fixed", top: "1rem", right: "1rem" }}
-        />
-        <Card variant="outlined">
-          <BookHiveIcon />
-          <Typography
-            component="h1"
-            variant="h4"
-            sx={{ width: "100%", fontSize: "clamp(2rem, 20vw, 2.15rem)" }}
-          >
-            Sign in to your account!
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            method="post"
-            noValidate
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              width: "100%",
-              gap: 2,
-            }}
-          >
-            <FormControl>
-              <FormLabel htmlFor="username">Username</FormLabel>
-              <TextField
-                error={usernameError}
-                helperText={usernameErrorMessage}
-                id="username"
-                type="text"
-                name="username"
-                placeholder="your_username"
-                autoComplete="username"
-                autoFocus
-                required
-                fullWidth
-                variant="outlined"
-                color={"primary"}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="password">Password</FormLabel>
-              <TextField
-                error={passwordError}
-                helperText={passwordErrorMessage}
-                name="password"
-                placeholder="••••••"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                required
-                fullWidth
-                variant="outlined"
-                color={passwordError ? "error" : "primary"}
-              />
-            </FormControl>
-
-            <ForgotPassword open={open} handleClose={handleClose} />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              onClick={validateInputs}
+    return (
+      <div {...props}>
+        <SignInContainer direction="column" justifyContent="space-between">
+          <ColorModeIconDropdown
+            size="medium"
+            sx={{ position: "fixed", top: "1rem", right: "1rem" }}
+          />
+          <Card variant="outlined">
+            <BookHiveIcon />
+            <Typography
+              component="h1"
+              variant="h4"
+              sx={{ width: "100%", fontSize: "clamp(2rem, 20vw, 2.15rem)" }}
             >
-              Sign in
-            </Button>
-            <Link
-              component="button"
-              type="button"
-              onClick={handleClickOpen}
-              variant="body2"
-              sx={{ alignSelf: "center" }}
-            >
-              Forgot your password?
-            </Link>
-          </Box>
-          <Divider>or</Divider>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={() =>
-                alert("Sign in with Google not yet implemented 🙏")
-              }
-              startIcon={<GoogleIcon />}
-            >
-              Sign in with Google{"  "}
-              <Typography
-                component="em"
-                sx={{ width: "25%", fontSize: ".5rem", color: "gray" }}
-              >
-                (To be implemented)
-              </Typography>
-            </Button>
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={() =>
-                alert("Sign in with Google not yet implemented 🙏")
-              }
-              startIcon={<FacebookIcon />}
-            >
-              Sign in with Facebook{" "}
-              <Typography
-                component="em"
-                sx={{ width: "25%", fontSize: ".5rem", color: "gray" }}
-              >
-                (To be implemented)
-              </Typography>
-            </Button>
-            <Typography sx={{ textAlign: "center" }}>
-              Don&apos;t have an account?{" "}
-              <RouterLink to="/sign-up">Sign up</RouterLink>
+              Sign in to your account!
             </Typography>
-          </Box>
-        </Card>
-      </SignInContainer>
-    </div>
-  )
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              method="post"
+              noValidate
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "100%",
+                gap: 2,
+              }}
+            >
+              <FormControl>
+                <FormLabel htmlFor="username">Username</FormLabel>
+                <TextField
+                  error={usernameError}
+                  helperText={usernameErrorMessage}
+                  id="username"
+                  type="text"
+                  name="username"
+                  placeholder="your_username"
+                  autoComplete="username"
+                  autoFocus
+                  required
+                  fullWidth
+                  variant="outlined"
+                  color={"primary"}
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel htmlFor="password">Password</FormLabel>
+                <TextField
+                  error={passwordError}
+                  helperText={passwordErrorMessage}
+                  name="password"
+                  placeholder="••••••"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  required
+                  fullWidth
+                  variant="outlined"
+                  color={passwordError ? "error" : "primary"}
+                />
+              </FormControl>
+
+              <ForgotPassword open={open} handleClose={handleClose} />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                onClick={validateInputs}
+              >
+                Sign in
+              </Button>
+              <Link
+                component="button"
+                type="button"
+                onClick={handleClickOpen}
+                variant="body2"
+                sx={{ alignSelf: "center" }}
+              >
+                Forgot your password?
+              </Link>
+            </Box>
+            <Divider>or</Divider>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              <Button
+                fullWidth
+                variant="outlined"
+                onClick={() =>
+                  alert("Sign in with Google not yet implemented 🙏")
+                }
+                startIcon={<GoogleIcon />}
+              >
+                Sign in with Google{"  "}
+                <Typography
+                  component="em"
+                  sx={{ width: "25%", fontSize: ".5rem", color: "gray" }}
+                >
+                  (To be implemented)
+                </Typography>
+              </Button>
+              <Button
+                fullWidth
+                variant="outlined"
+                onClick={() =>
+                  alert("Sign in with Google not yet implemented 🙏")
+                }
+                startIcon={<FacebookIcon />}
+              >
+                Sign in with Facebook{" "}
+                <Typography
+                  component="em"
+                  sx={{ width: "25%", fontSize: ".5rem", color: "gray" }}
+                >
+                  (To be implemented)
+                </Typography>
+              </Button>
+              <Typography sx={{ textAlign: "center" }}>
+                Don&apos;t have an account?{" "}
+                <RouterLink to="/sign-up">Sign up</RouterLink>
+              </Typography>
+            </Box>
+          </Card>
+        </SignInContainer>
+      </div>
+    )
+  }
 }

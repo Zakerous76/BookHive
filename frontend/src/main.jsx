@@ -13,7 +13,3 @@ createRoot(document.getElementById("root")).render(
     </Provider>
   </div>
 )
-
-store.subscribe(() => {
-  console.log("Subscribe - store.getStore(): ", store.getState())
-})

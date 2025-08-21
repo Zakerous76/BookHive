@@ -3,6 +3,28 @@ import { Link } from "react-router-dom"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 
+export function BookHiveText({ otherText = "BookHive!" }) {
+  return (
+    <Typography
+      component="span"
+      variant="h1"
+      sx={(theme) => ({
+        fontFamily: "Satisfy",
+        fontWeight: "1000",
+        fontSize: "4rem",
+        color: theme.palette.mode === "dark" ? "gold" : "#ffb300ff",
+        textShadow: `
+            0 0 0px ${"#f2b62bff"},
+            0 0 30px ${"#f6ba2b"},
+            0 0 60px ${"#fac447ff"}
+          `,
+      })}
+    >
+      {otherText}
+    </Typography>
+  )
+}
+
 export function BookHiveIcon({ height }) {
   return (
     <Link

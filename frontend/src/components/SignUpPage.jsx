@@ -93,7 +93,6 @@ export default function SignUpPage(props) {
       } else if (response.status > 399) {
         setPasswordError(true)
         setPasswordErrorMessage(`An error occured. Please try again later...`)
-        console.log(response)
       } else {
         navigate("/sign-in")
       }
