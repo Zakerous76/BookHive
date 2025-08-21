@@ -9,11 +9,17 @@ import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import Rating from "@mui/material/Rating"
 import ListSubheader from "@mui/material/ListSubheader"
+import Card from "@mui/material/Card"
+
+import { Link as MuiLink, TextareaAutosize, useTheme } from "@mui/material"
+import { Link as RouterLink } from "react-router-dom"
+import { hoverTransition } from "../shared-theme/themePrimitives"
 
 const ReviewsSection = ({ book, dispatch, setActiveBook, userToken }) => {
   const [newReview, setNewReview] = useState("")
   const [rating, setRating] = useState(0)
   const [submitting, setSubmitting] = useState(false)
+  const theme = useTheme()
 
   const handleAddReview = async () => {
     if (!newReview.trim() || rating === 0) return // require text and rating
@@ -69,15 +75,23 @@ const ReviewsSection = ({ book, dispatch, setActiveBook, userToken }) => {
 
         {/* Review Text */}
         {userToken ? (
-          <Box>
-            <TextField
-              fullWidth
-              label="Write a review..."
+          <Box mb={4}>
+            <TextareaAutosize
+              minRows={3}
+              maxRows={6}
               value={newReview}
               onChange={(e) => setNewReview(e.target.value)}
-              multiline
-              sx={{
-                my: "auto",
+              placeholder="Write a review..."
+              style={{
+                width: "100%",
+                padding: "16.5px",
+                fontSize: "1rem",
+                fontFamily: "inherit",
+                backgroundColor: "hsla(0, 0%, 91%, 0.08)", // 👈 same as Card
+                border: `1px solid ${theme.palette.divider}`, // 👈 matches TextField
+                borderRadius: theme.shape.borderRadius, // 👈 your theme’s radius
+                resize: "none", // optional: prevent dragging
+                boxSizing: "border-box",
               }}
             />
 
@@ -91,9 +105,20 @@ const ReviewsSection = ({ book, dispatch, setActiveBook, userToken }) => {
             </Button>
           </Box>
         ) : (
-          <Typography variant="body2" color="text.secondary">
-            Please sign in to add a review
-          </Typography>
+          <Card sx={{ mb: 4 }}>
+            <Typography component="p" variant="body1">
+              Please{" "}
+              <MuiLink
+                component={RouterLink}
+                to="/sign-in"
+                underline="hover"
+                sx={{ ...hoverTransition, textDecoration: "underline" }}
+              >
+                Sign In
+              </MuiLink>{" "}
+              to add or edit a review!
+            </Typography>
+          </Card>
         )}
       </Box>
     </Box>

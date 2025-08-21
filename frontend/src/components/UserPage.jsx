@@ -9,7 +9,7 @@ import ListItem from "@mui/material/ListItem"
 
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { Stack } from "@mui/material"
+import { ListSubheader, Stack } from "@mui/material"
 
 const UserPage = () => {
   window.scrollTo({ top: 0, behavior: "smooth" })
@@ -37,7 +37,6 @@ const UserPage = () => {
         display: "flex",
         alignItems: "center", // horizontal center
         px: 2,
-        maxWidth: "800px",
         mx: "auto", // center horizontally on wide screens
         textAlign: "center",
       }}
@@ -70,23 +69,31 @@ const UserPage = () => {
         Sign Out
       </Button>
 
-      <Divider sx={{ my: 4 }} />
+      <Divider sx={{ my: 4, borderBottomWidth: 4, width: "100%" }} />
 
+      <Typography variant="h5" gutterBottom>
+        Your Favorite Books
+      </Typography>
+      <List>
+        {userData?.favorites?.length ? (
+          userData?.favorites?.map((review) => (
+            <ListItem key={review._id} sx={{ borderBottom: "1px solid #ddd" }}>
+              <ListItemText
+                primary={review.text}
+                secondary={`Rating: ${review.rating} ⭐ | Book: ${
+                  review.bookId?.title ?? "Unknown"
+                }`}
+              />
+            </ListItem>
+          ))
+        ) : (
+          <ListSubheader>No favorite books</ListSubheader>
+        )}
+      </List>
+      <Divider sx={{ my: 4, borderBottomWidth: 4, width: "100%" }} />
       <Typography variant="h5" gutterBottom>
         Your Reviews
       </Typography>
-      <List>
-        {userData?.favorites?.map((review) => (
-          <ListItem key={review._id} sx={{ borderBottom: "1px solid #ddd" }}>
-            <ListItemText
-              primary={review.text}
-              secondary={`Rating: ${review.rating} ⭐ | Book: ${
-                review.bookId?.title ?? "Unknown"
-              }`}
-            />
-          </ListItem>
-        ))}
-      </List>
       <List>
         {userData?.reviews?.map((review) => (
           <ListItem key={review._id} sx={{ borderBottom: "1px solid #ddd" }}>
