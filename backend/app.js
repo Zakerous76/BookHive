@@ -5,12 +5,13 @@ const reviewRouter = require("./controllers/reviewRouter")
 const userRouter = require("./controllers/userRouter")
 const bookRouter = require("./controllers/bookRouter")
 const middleware = require("./utils/middleware")
+const path = require("path")
 
 const app = express()
 connectToDb()
 
 app.use(express.json())
-app.use(express.static("dist"))
+app.use(express.static(path.join(process.cwd(), "dist")))
 app.use(middleware.requestLogger)
 
 // API routes
