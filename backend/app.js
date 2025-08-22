@@ -10,7 +10,7 @@ const app = express()
 connectToDb()
 
 app.use(express.json())
-app.use(express.static("dist"))
+app.use(express.static(path.join(process.cwd(), "dist")))
 app.use(middleware.requestLogger)
 
 // API routes
