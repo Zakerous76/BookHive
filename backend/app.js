@@ -1,3 +1,4 @@
+// app.js
 const path = require("path")
 const express = require("express")
 const connectToDb = require("./utils/connectToDb")
@@ -7,27 +8,37 @@ const bookRouter = require("./controllers/bookRouter")
 const middleware = require("./utils/middleware")
 
 const app = express()
+
+// Connect to database
 connectToDb()
 
+// Use JSON parser
 app.use(express.json())
-app.use(express.static(path.join(process.cwd(), "dist")))
+
+// 🔹 Serve frontend static files
+const DIST_PATH = path.join(process.cwd(), "dist")
+console.log("Serving frontend from:", DIST_PATH)
+app.use(express.static(DIST_PATH))
+
+// Middleware logger
 app.use(middleware.requestLogger)
 
-// API routes
+// 🔹 API routes
 app.use("/api/review", reviewRouter)
 app.use("/api/user", userRouter)
 app.use("/api/book", bookRouter)
 
-app.get("/", (req, res) => {
-  return res.json({ message: "welcome!" }).end()
+// Optional root API endpoint
+app.get("/api", (req, res) => {
+  res.json({ message: "API is working!" })
 })
 
-// 🔑 Catch-all handler: return index.html for React Router
+// 🔹 Catch-all for React Router — must come after static & API
 app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.resolve(__dirname, "dist", "index.html"))
+  res.sendFile(path.join(DIST_PATH, "index.html"))
 })
 
-// Error middleware
+// 🔹 Error handlers
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
