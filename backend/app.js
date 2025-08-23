@@ -17,8 +17,8 @@ app.use(express.json())
 
 // 🔹 Serve frontend static files
 const DIST_PATH = path.join(process.cwd(), "dist")
-console.log("Serving frontend from:", DIST_PATH)
-app.use(express.static(DIST_PATH))
+// console.log("Serving frontend from:", DIST_PATH)
+// app.use(express.static(DIST_PATH))
 
 // Middleware logger
 app.use(middleware.requestLogger)
@@ -34,9 +34,9 @@ app.get("/api", (req, res) => {
 })
 
 // 🔹 Catch-all for React Router — must come after static & API
-app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.join(DIST_PATH, "index.html"))
-})
+// app.get(/^\/(?!api).*/, (req, res) => {
+//   res.sendFile(path.join(DIST_PATH, "index.html"))
+// })
 
 // 🔹 Error handlers
 app.use(middleware.unknownEndpoint)
