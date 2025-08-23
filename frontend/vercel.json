@@ -1,10 +1,24 @@
 {
+<<<<<<< HEAD
+=======
+  "version": 2,
+  "builds": [
+    {
+      "src": "build/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+>>>>>>> 95b443d2ddf44985f9a2b9afa438d9ba42222fbc
   "routes": [
     { "src": "/static/(.*)", "dest": "/static/$1" },
     { "src": "/favicon.ico", "dest": "/favicon.ico" },
     { "src": "/logo192.png", "dest": "/logo192.png" },
     { "src": "/logo512.png", "dest": "/logo512.png" },
     { "src": "/(.*)", "dest": "/index.html" }
+<<<<<<< HEAD
   ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+=======
+  ]
+>>>>>>> 95b443d2ddf44985f9a2b9afa438d9ba42222fbc
 }
