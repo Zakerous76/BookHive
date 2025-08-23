@@ -10,13 +10,5 @@ export default defineConfig(({ mode }) => {
       react(),
       visualizer({ open: true, filename: "stats.html", gzipSize: true }),
     ],
-    server: {
-      proxy: {
-        "/api": {
-          target: env.VITE_BACKEND_URL, // now matches .env
-          changeOrigin: true,
-        },
-      },
-    },
   }
 })

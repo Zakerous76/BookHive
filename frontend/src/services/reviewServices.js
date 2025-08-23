@@ -1,5 +1,5 @@
 import axios from "axios"
-const baseURL = "/api/review"
+const baseURL = `${import.meta.env.VITE_BACKEND_URL}/api/review`
 
 let token = null
 let config = null

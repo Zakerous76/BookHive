@@ -1,5 +1,5 @@
 import axios from "axios"
-const baseURL = "/api/book"
+const baseURL = `${import.meta.env.VITE_BACKEND_URL}/api/book`
 
 const getBookCount = async () => {
   try {
