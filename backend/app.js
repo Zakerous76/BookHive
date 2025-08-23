@@ -11,12 +11,22 @@ const { VITE_FRONTEND_URL } = require("./utils/config")
 
 const app = express()
 
-// Allow your frontend origin
+const allowedOrigins = [VITE_FRONTEND_URL, "http://localhost:5173"]
+
 app.use(
   cors({
-    origin: VITE_FRONTEND_URL,
+    origin: function (origin, callback) {
+      // Allow requests with no origin like mobile apps or curl
+      if (!origin) return callback(null, true)
+      console.log("origin", origin)
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true)
+      } else {
+        return callback(new Error("Not allowed by CORS"))
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // if you need cookies/auth
+    credentials: true,
   })
 )
 
