@@ -19,7 +19,7 @@ leave reviews with ratings.
 The purpose of making this project was to practice everything I had learned by completing the mandatory portion of the Fullstack open course [https://fullstackopen.com/en].
 
 
-> **Live Demo**: [https://bookhive-hyx1.onrender.com]
+> **Live Demo**: [https://bookhive-edu.vercel.app/]
 
 <img width="1586" height="933" alt="screencapture-bookhive-hyx1-onrender-2025-08-22-03_39_54" src="https://github.com/user-attachments/assets/d4aeb0b9-1947-403e-82c5-a94ebfde8888" />
 
