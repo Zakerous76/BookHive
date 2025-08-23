@@ -1,3 +1,10 @@
 {
-  "rewrites": [{ "source": "/(.*)/", "destination": "/index.html" }]
+  "routes": [
+    { "src": "/static/(.*)", "dest": "/static/$1" },
+    { "src": "/favicon.ico", "dest": "/favicon.ico" },
+    { "src": "/logo192.png", "dest": "/logo192.png" },
+    { "src": "/logo512.png", "dest": "/logo512.png" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
