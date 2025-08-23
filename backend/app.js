@@ -6,8 +6,19 @@ const reviewRouter = require("./controllers/reviewRouter")
 const userRouter = require("./controllers/userRouter")
 const bookRouter = require("./controllers/bookRouter")
 const middleware = require("./utils/middleware")
+const cors = require("cors")
+const { VITE_FRONTEND_URL } = require("./utils/config")
 
 const app = express()
+
+// Allow your frontend origin
+app.use(
+  cors({
+    origin: VITE_FRONTEND_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // if you need cookies/auth
+  })
+)
 
 // Connect to database
 connectToDb()
@@ -22,6 +33,11 @@ const DIST_PATH = path.join(process.cwd(), "dist")
 
 // Middleware logger
 app.use(middleware.requestLogger)
+
+// Root
+app.get("/", async (req, res) => {
+  return res.json({ message: "Welcome to BOOKHIVE backend" })
+})
 
 // 🔹 API routes
 app.use("/api/review", reviewRouter)

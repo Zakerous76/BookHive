@@ -12,4 +12,12 @@ const PORT = process.env.PORT
 const JWT_SECRET = process.env.JWT_SECRET
 const GUTENDEX_API = process.env.GUTENDEX_API
 
-module.exports = { MONGODB_URI, PORT, JWT_SECRET, GUTENDEX_API }
+const VITE_FRONTEND_URL = process.env.VITE_FRONTEND_URL
+
+module.exports = {
+  MONGODB_URI,
+  PORT,
+  JWT_SECRET,
+  GUTENDEX_API,
+  VITE_FRONTEND_URL,
+}
